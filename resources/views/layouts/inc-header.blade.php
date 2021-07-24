@@ -103,7 +103,11 @@
 
                         <li>
                             <div class="dropdown dropdown-cart">
+                            @if(Session::get('cart') != null)
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class=" icon-basket-1"></i>Cart ({{count(array(Session::get('cart')))}}) </a>
+                            @else
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class=" icon-basket-1"></i>Cart (0) </a>
+                            @endif
 
                                 @if(Session::get('cart') != null)
 

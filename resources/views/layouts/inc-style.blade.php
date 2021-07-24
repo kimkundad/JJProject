@@ -15,6 +15,10 @@
 body, html,h1,h2,h3,h4,h5,h6,p,span,strong{
   font-family: 'Kanit', sans-serif;
 }
+.main_title p{
+  font-family: 'Kanit', sans-serif;
+}
+
 p {
 font-size: 14px;
 }

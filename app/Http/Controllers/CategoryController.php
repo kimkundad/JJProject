@@ -21,16 +21,16 @@ class CategoryController extends Controller
     {
 
 
-      $cat = DB::table('categories')->select(
-            'categories.*'
+      $cat = DB::table('category')->select(
+            'category.*'
             )
             ->get();
 
             $s = 1;
             foreach ($cat as $obj) {
                 $optionsRes = [];
-                $options = DB::table('shops')->select(
-                  'shops.*'
+                $options = DB::table('product')->select(
+                  'product.*'
                   )
                   ->where('category_id', $obj->id)
                   ->count();

@@ -78,7 +78,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
     @if($shop)
       @foreach($shop as $shops)
 
-    <div class="col-md-3 col-sm-6 wow zoomIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: zoomIn;  padding-right: 6px; padding-left: 6px;">
+    <div class="col-md-3 col-xs-6 set_new_mar wow zoomIn" data-wow-delay="0.1s" style="visibility: visible; animation-delay: 0.1s; animation-name: zoomIn;  padding-right: 6px; padding-left: 6px;">
 
       @if($set_point<=3)
       <div class="ribbon_3 popular"><span>Recommend</span></div>
@@ -204,6 +204,33 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
   margin-bottom:30px;
 }
 }
+
+.c_price_pro{
+  margin:8px 0px 0px 0px;
+  font-size: 20px;
+}
+.name_pro_index{
+  font-size: 16px;
+}
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: 400;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: 0em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: 0em;
+}
+.rating {
+  margin: 1px 0 3px -3px;
+    font-size: 13px;
+}
   </style>
 
 
@@ -213,119 +240,62 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
     <!-- สคริปก่อนหน้านี้ ลบ ไปแล้ว -->
 
+    @if(isset($product))
+    @foreach($product as $u)
+    <div class="col-md-3 col-xs-6 set_new_mar">
+        <div class="thumbnail a_sd_move">
+              <div style=" overflow: hidden; position: relative;">
+                  <a href="{{url('product/'.$u->id)}}">
+                      <img src="{{url('assets/image/product/'.$u->image_pro)}}">
+                  </a>
+                </div>
+                <div class="caption" style="padding: 3px;">
+                            <div class="descript bold" style="border-bottom: 1px dashed #dff0d8; height: 38px;overflow: hidden; ">
+                                <a href="{{url('product/'.$u->id)}}">{{$u->name_pro}}</a>
+                            </div>
 
-    <div class="col-md-3 col-xs-6 set_new_mar">
-        <div class="thumbnail a_sd_move">
-              <div style=" overflow: hidden; position: relative;">
-                  <a href="{{url('product/1')}}">
-                      <img src="{{url('assets/image/product/1450971643-20151122_101224.jpg')}}">
-                  </a>
-                </div>
-                <div class="caption" style="padding: 3px;">
-                  <div class="descript bold" >
-                      <a href="{{url('product/1')}}">กระโปรงอัดพลีท ใส่คลุมชุดว่ายน้ำ ชุดเดินชายหาด</a>
-                  </div>
+                            <div class="descript" style="height: 20px;">
+                              <span style="color: #e03753; font-size: 18px; font-weight: 600;">฿ {{number_format($u->price)}} </span>
+                              <div class="descript-t">
+                              <div class="postMetaInline-authorLockup">
+
+                             
+
+                                <div class="rating">
+
+            <?php
+            for($i=1;$i <= $u->rating;$i++){
+            ?>
+
+                            <i class="icon-star voted"></i>
+            <?php
+            }
+            ?>
+
+            <?php
+            $total = 5;
+            $total -= $u->rating;
+
+            for($i=1;$i <= $total;$i++){
+            ?>
+
+                           <i class="icon-star-empty"></i>
+            <?php
+            }
+            ?>
               </div>
+
+                              </div>
+                              </div>
+                            </div>
+
+                          </div>
         </div>
     </div>
-    <div class="col-md-3 col-xs-6 set_new_mar">
-        <div class="thumbnail a_sd_move">
-              <div style=" overflow: hidden; position: relative;">
-                  <a href="{{url('product/1')}}">
-                      <img src="{{url('assets/image/product/1450971643-20151122_101224.jpg')}}">
-                  </a>
-                </div>
-                <div class="caption" style="padding: 3px;">
-                  <div class="descript bold" >
-                      <a href="{{url('product/1')}}">กระโปรงอัดพลีท ใส่คลุมชุดว่ายน้ำ ชุดเดินชายหาด</a>
-                  </div>
-              </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-xs-6 set_new_mar">
-        <div class="thumbnail a_sd_move">
-              <div style=" overflow: hidden; position: relative;">
-                  <a href="{{url('product/1')}}">
-                      <img src="{{url('assets/image/product/1450971643-20151122_101224.jpg')}}">
-                  </a>
-                </div>
-                <div class="caption" style="padding: 3px;">
-                  <div class="descript bold" >
-                      <a href="{{url('product/1')}}">กระโปรงอัดพลีท ใส่คลุมชุดว่ายน้ำ ชุดเดินชายหาด</a>
-                  </div>
-              </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-xs-6 set_new_mar">
-        <div class="thumbnail a_sd_move">
-              <div style=" overflow: hidden; position: relative;">
-                  <a href="{{url('product/1')}}">
-                      <img src="{{url('assets/image/product/1450971643-20151122_101224.jpg')}}">
-                  </a>
-                </div>
-                <div class="caption" style="padding: 3px;">
-                  <div class="descript bold" >
-                      <a href="{{url('product/1')}}">กระโปรงอัดพลีท ใส่คลุมชุดว่ายน้ำ ชุดเดินชายหาด</a>
-                  </div>
-              </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-xs-6 set_new_mar">
-        <div class="thumbnail a_sd_move">
-              <div style=" overflow: hidden; position: relative;">
-                  <a href="{{url('product/1')}}">
-                      <img src="{{url('assets/image/product/1450971643-20151122_101224.jpg')}}">
-                  </a>
-                </div>
-                <div class="caption" style="padding: 3px;">
-                  <div class="descript bold" >
-                      <a href="{{url('product/1')}}">กระโปรงอัดพลีท ใส่คลุมชุดว่ายน้ำ ชุดเดินชายหาด</a>
-                  </div>
-              </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-xs-6 set_new_mar">
-        <div class="thumbnail a_sd_move">
-              <div style=" overflow: hidden; position: relative;">
-                  <a href="{{url('product/1')}}">
-                      <img src="{{url('assets/image/product/1450971643-20151122_101224.jpg')}}">
-                  </a>
-                </div>
-                <div class="caption" style="padding: 3px;">
-                  <div class="descript bold" >
-                      <a href="{{url('product/1')}}">กระโปรงอัดพลีท ใส่คลุมชุดว่ายน้ำ ชุดเดินชายหาด</a>
-                  </div>
-              </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-xs-6 set_new_mar">
-        <div class="thumbnail a_sd_move">
-              <div style=" overflow: hidden; position: relative;">
-                  <a href="{{url('product/1')}}">
-                      <img src="{{url('assets/image/product/1450971643-20151122_101224.jpg')}}">
-                  </a>
-                </div>
-                <div class="caption" style="padding: 3px;">
-                  <div class="descript bold" >
-                      <a href="{{url('product/1')}}">กระโปรงอัดพลีท ใส่คลุมชุดว่ายน้ำ ชุดเดินชายหาด</a>
-                  </div>
-              </div>
-        </div>
-    </div>
-    <div class="col-md-3 col-xs-6 set_new_mar">
-        <div class="thumbnail a_sd_move">
-              <div style=" overflow: hidden; position: relative;">
-                  <a href="{{url('product/1')}}">
-                      <img src="{{url('assets/image/product/1450971643-20151122_101224.jpg')}}">
-                  </a>
-                </div>
-                <div class="caption" style="padding: 3px;">
-                  <div class="descript bold" >
-                      <a href="{{url('product/1')}}">กระโปรงอัดพลีท ใส่คลุมชุดว่ายน้ำ ชุดเดินชายหาด</a>
-                  </div>
-              </div>
-        </div>
-    </div>
+    @endforeach
+    @endif
+    
+    
   
 
 
@@ -470,9 +440,10 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
                 <div class="text-center my-p-30" >
 
-                        <p style="font-size: 18px;">
-                         <span  style="font-weight: 700; color: #e04f67;">สำหรับผู้ที่ต้องการเคลีย stock ที่ค้างอยู่</span><br><br /> สามารถติดต่อเรามาได้ทันที <br />เราเตรียมราคาที่เหมาะสมไว้ให้ <br />
-                         <h3 style="margin-bottom: 0px; margin-top: 10px;"><span>และพร้อมจัดการสินค้าค้าง stock ให้ทันที</span><h3>
+                        <p style="    font-size: 22px;
+    line-height: 30px;">
+                         สำหรับผู้ต้องการทำธุระกิจ ต้องการสินค้าจำนวนมาก <br> เรามีสินค้ากว่า 300,000 ชนิด <br> เตรียมไว้ให้คุณในราคาที่เหมาะสม
+                         <h3 style="margin-bottom: 0px; margin-top: 10px;"><span>แล้วเราจะรีบติดต่อกลับ</span><h3>
                        </p>
                        <br>
 
@@ -489,17 +460,8 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                          }
                        </style>
 
-                       <form id="add_subscribe" method="get" >
-                          <div class="input-group">
-                            <input type="text" id="subscribe_email" name="email" placeholder="Enter your Email or Phone number" class="form-control style-2" required>
+                      
 
-                            <!-- Write here your end point -->
-                            <span  class="input-group-btn">
-                          <a  class="btn add_subscribe_btn" id="add_subscribe_btn"  style="margin-left:0;">ส่งอีเมลหรือเบอร์ติดต่อ</a >
-                          </span>
-                              </div>
-                          <!-- /input-group -->
-                        </form>
 
 
                         </div>
@@ -512,7 +474,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
             <div class=""  style="margin-bottom: 0px;">
 
 
-                         <h2 style="font-weight: 700; font-size: 25px; margin-top: 0px; "><span>อยากจะได้สินค้าอะไร บอกเรา เราหาให้</span></h2>
+                         <h2 style="font-weight: 700; font-size: 21px; margin-top: 0px; "><span>อยากจะได้สินค้าอะไร บอกเรา เราหาให้!!!</span></h2>
 
                        <br>
 
@@ -555,8 +517,6 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
           </div>
 
 
-
-          
 
         </div>
         <div class="row">                  

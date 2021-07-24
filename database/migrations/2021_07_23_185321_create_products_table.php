@@ -27,6 +27,7 @@ class CreateProductsTable extends Migration
             $table->integer('stock')->default('0');
             $table->integer('shipping_price')->default('0');
             $table->integer('total')->default('0');
+            $table->integer('sort')->default('0');
             $table->timestamps();
         });
     }

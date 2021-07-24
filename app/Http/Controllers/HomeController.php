@@ -101,6 +101,13 @@ $data['category1'] = $cat;
         $data['shop'] = $shop;
         $data['shop_count'] = $shop_count;
 
+
+        $product = DB::table('products')
+            ->where('status', 1)
+            ->orderBy('sort', 'asc')
+            ->get();
+        $data['product'] = $product;
+
         return view('welcome', $data);
     }
 

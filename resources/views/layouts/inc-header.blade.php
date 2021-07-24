@@ -28,11 +28,39 @@
 
                           </div><!-- End Dropdown access -->
                           @else
-                          <div class="dropdown dropdown-access">
+                          <div class="dropdown dropdown-mini">
                             @if(Auth::user()->is_admin == 1)
-                              <a href="{{url('admin/user')}}" class="dropdown-toggle" id="access_link">{{ substr(Auth::user()->name,0,15) }} controller</a>
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link">{{ substr(Auth::user()->name,0,15) }} <i class="icon-down-open-mini"></i></a>
+                                <div class="dropdown-menu" style="min-width: 160px;">
+                                    <ul id="lang_menu">
+                                        <li><a href="{{url('my_account')}}"><i class="icon_set_1_icon-29"></i> บัญชีของฉัน</a>
+                                        </li>
+                                        <li><a href="{{ url('user_purchase') }}"><i class="icon_set_1_icon-50"></i> การซื้อของฉัน</a>
+                                        </li>
+                                        <li><a href="{{ url('user_coupon') }}"><i class="im im-icon-Gift-Box" style="margin-right:5px; margin-left:5px;"></i> คูปองส่วนลด </a>
+                                        </li>
+                                        <li><a href="{{ url('payment_notify') }}"><i class="im im-icon-Coin" style="margin-right:5px; margin-left:5px;"></i> แจ้งชำระเงินโอน </a>
+                                        </li>
+                                        <li><a href="{{ url('logout') }}"><i class="icon-lock" style="margin-right:5px; margin-left:5px;"></i> ออกจากระบบ </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             @else
-                            <a href="#" class="dropdown-toggle" id="access_link">{{ substr(Auth::user()->name,0,15) }}</a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link">{{ substr(Auth::user()->name,0,15) }} <i class="icon-down-open-mini"></i></a>
+                                    <div class="dropdown-menu" style="min-width: 160px;">
+                                        <ul id="lang_menu">
+                                        <li><a href="{{url('my_account')}}"><i class="icon_set_1_icon-29"></i> บัญชีของฉัน</a>
+                                        </li>
+                                        <li><a href="{{ url('user_purchase') }}"><i class="icon_set_1_icon-50"></i> การซื้อของฉัน</a>
+                                        </li>
+                                        <li><a href="{{ url('user_coupon') }}"><i class="im im-icon-Gift-Box" style="margin-right:5px; margin-left:5px;"></i> คูปองส่วนลด </a>
+                                        </li>
+                                        <li><a href="{{ url('payment_notify') }}"><i class="im im-icon-Coin" style="margin-right:5px; margin-left:5px;"></i> แจ้งชำระเงินโอน </a>
+                                        </li>
+                                        <li><a href="{{ url('logout') }}"><i class="icon-lock" style="margin-right:5px; margin-left:5px;"></i> ออกจากระบบ </a>
+                                        </li>
+                                        </ul>
+                                    </div>
                             @endif
 
                           </div><!-- End Dropdown access -->
@@ -73,12 +101,31 @@
                          <a style="font-size: 15px;" href="{{url('/presentation')}}">{{ trans('message.category') }} </a>
 
                      </li>
-                     
 
                   <li>
                      <a style="font-size: 15px;" href="{{url('/contact_us')}}">{{ trans('message.contact_us') }}  </a>
 
                  </li>
+                 @if (Auth::guest())
+                 @else
+                 <li class="submenu">
+                                <a href="javascript:void(0);" class="show-submenu">บัญชีของ {{ substr(Auth::user()->name,0,15) }} <i class="icon-down-open-mini"></i></a>
+                                <ul>
+
+                                        <li><a href="{{url('my_account')}}"> บัญชีของฉัน</a>
+                                        </li>
+                                        <li><a href="{{ url('user_purchase') }}"> การซื้อของฉัน</a>
+                                        </li>
+                                        <li><a href="{{ url('user_coupon') }}"> คูปองส่วนลด </a>
+                                        </li>
+                                        <li><a href="{{ url('payment_notify') }}"> แจ้งชำระเงินโอน </a>
+                                        </li>
+                                        <li><a href="{{ url('logout') }}"> ออกจากระบบ </a>
+                                        </li>
+
+                                </ul>
+                 </li>
+                 @endif
                  <li class="submenu">
                                 <a href="javascript:void(0);" class="show-submenu">Choose language <i class="icon-down-open-mini"></i></a>
                                 <ul>
@@ -88,7 +135,7 @@
                                     <li><a href="{{ URL::to('change/ch') }}">Chaina language</a></li>
 
                                 </ul>
-                            </li>
+                 </li>
 
 
 

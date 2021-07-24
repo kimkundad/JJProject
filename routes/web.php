@@ -50,6 +50,9 @@ Route::get('product/{id}', 'HomeController@product');
 Route::post('/add_session_value', 'HomeController@add_session_value');
 Route::get('deleteCart/{id}', 'HomeController@deleteCart');
 
+
+
+
 Route::group(['middleware' => ['UserRole:manager|employee|customer']], function() {
 
 Route::get('wishlist', 'HomeController@wishlist');
@@ -58,6 +61,9 @@ Route::post('del_wishlist', 'HomeController@del_wishlist');
 Route::get('/payment', 'HomeController@payment');
 Route::post('/add_order', 'HomeController@add_order');
 Route::get('confirmation/', 'HomeController@confirmation');
+
+Route::get('my_account/', 'ProfileController@my_account');
+
     
 });
 

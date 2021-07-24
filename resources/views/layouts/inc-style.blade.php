@@ -2,7 +2,7 @@
 
 <!-- CSS -->
 <link href="{{url('assets/css/base.css')}}" rel="stylesheet">
-
+<link rel="stylesheet" href="{{url('assets/css/icons.css')}}" >
 <!-- SPECIFIC CSS -->
 <link href="{{url('assets/css/skins/square/grey.css')}}" rel="stylesheet">
 <link href="{{url('assets/css/date_time_picker.css')}}" rel="stylesheet">
@@ -26,6 +26,82 @@ body {
 
     font-size: 13px;
 
+}
+
+.dropdown-mini .dropdown-menu ul#lang_menu {
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+header#plain ul#top_links li:first-child {
+    border-left: none;
+}
+.dropdown-mini .dropdown-menu ul#lang_menu li a {
+    color: #555!important;
+    text-align: left;
+    border-bottom: 1px solid #ededed;
+    padding: 8px;
+    display: block;
+}
+.dropdown-mini .dropdown-menu:before {
+    bottom: 100%;
+    right: 10%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #e04f67;
+    border-width: 7px;
+    margin-left: -7px;
+}
+.dropdown-mini .dropdown-menu {
+    border: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    float: right;
+    left: auto;
+    text-align: left;
+    padding: 0;
+    right: 0;
+    min-width: 100px;
+    width: auto;
+    top: 100%;
+    font-size: 12px;
+    font-weight: 400;
+    text-shadow: none;
+    text-transform: none!important;
+    border-top: 2px solid #e04f67;
+}
+.dropdown-mini .dropdown-menu ul#lang_menu li a {
+    font-size: 13px;
+    color: #555!important;
+    text-align: left;
+    border-bottom: 1px solid #ededed;
+    padding: 8px;
+    display: block;
+}
+h2.major {
+    position: relative;
+    border-top: solid 5px #e7eae8;
+}
+h2.major span {
+    background: #f9f9f9;
+    position: relative;
+    display: inline-block;
+    top: -0.775em;
+    padding: 0 1.5em 0 1.5em;
+    color: #6b7770;
+}
+.dropdown-mini .dropdown-menu ul#lang_menu li a i{
+    font-size: 16px;
+}
+.dropdown-mini .dropdown-menu ul#lang_menu li {
+    padding: 0;
+    margin: 0;
+    width: 100%;
 }
 ul#cart_items li .image img {
     padding: 1px;

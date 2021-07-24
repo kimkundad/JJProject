@@ -24,7 +24,7 @@ class ProshopController extends Controller
         $cat = DB::table('products')->select(
               'products.*',
               'products.id as id_q',
-              'products.status as status1'
+              'products.status as status1',
               'categories.*'
               )
               ->leftjoin('categories', 'categories.id',  'products.cat_id')

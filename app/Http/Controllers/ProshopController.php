@@ -24,6 +24,7 @@ class ProshopController extends Controller
         $cat = DB::table('products')->select(
               'products.*',
               'products.id as id_q',
+              'products.status as status1'
               'categories.*'
               )
               ->leftjoin('categories', 'categories.id',  'products.cat_id')
@@ -302,7 +303,7 @@ class ProshopController extends Controller
 
       }
 
-    public function api_post_status_shop(Request $request){
+    public function api_post_status_product(Request $request){
 
     $user = product::findOrFail($request->user_id);
 

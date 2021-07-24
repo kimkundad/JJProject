@@ -78,7 +78,7 @@
                       <td>
                         <div class="switch switch-sm switch-success">
                           <input type="checkbox" name="switch" data-plugin-ios-switch
-                          @if($u->status == 1)
+                          @if($u->status1 == 1)
                           checked="checked"
                           @endif
                           />
@@ -131,7 +131,7 @@ $(document).ready(function(){
 
     $.ajax({
             type:'POST',
-            url:'{{url('api/api_post_status_shop')}}',
+            url:'{{url('api/api_post_status_product')}}',
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
             data: { "user_id" : user_id },
             success: function(data){

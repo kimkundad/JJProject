@@ -244,7 +244,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
     @foreach($product as $u)
     <div class="col-md-3 col-xs-6 set_new_mar">
         <div class="thumbnail a_sd_move">
-              <div style=" overflow: hidden; position: relative;">
+              <div style=" overflow: hidden; position: relative; min-height: 153px; max-height: 173px;">
                   <a href="{{url('product/'.$u->id)}}">
                       <img src="{{url('assets/image/product/'.$u->image_pro)}}">
                   </a>

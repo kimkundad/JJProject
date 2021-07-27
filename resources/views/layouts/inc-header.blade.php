@@ -108,7 +108,7 @@
                  </li>
                  @if (Auth::guest())
                  @else
-                 <li class="submenu">
+                 <li class="submenu visible-sm visible-xs">
                                 <a href="javascript:void(0);" class="show-submenu">บัญชีของ {{ substr(Auth::user()->name,0,15) }} <i class="icon-down-open-mini"></i></a>
                                 <ul>
 

@@ -182,7 +182,26 @@ text-transform: uppercase;
 <div class="see-all-overlay"><span class="see-all-overlay-text">ดูทั้งหมด {{$home_image_count}} รูป</span></div></a>
 </div>
 
-@else
+@elseif($home_image_count == 3)
+
+<div class="col-md-12 col-sm-12" >
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[0]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[0]->image)}}" alt=""></a>
+</div>
+
+<div class="col-md-6 col-sm-6" style="padding-right: 3px; padding-top: 5px;">
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[1]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[1]->image)}}" alt=""></a>
+</div>
+
+<div class="col-md-6 col-sm-6" style="padding-left: 3px; padding-top: 5px;">
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[2]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[2]->image)}}" alt=""></a>
+</div>
+
+@elseif($home_image_count == 2)
+
+
 
 <div class="col-md-6 col-sm-6" style="padding-right: 3px;">
 
@@ -194,6 +213,37 @@ text-transform: uppercase;
 
 <a class="example-image-link" href="{{url('assets/image/product/'.$home_image[1]->image)}}" >
 <img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[1]->image)}}" alt=""></a>
+</div>
+
+
+@elseif($home_image_count == 4)
+
+
+<div class="col-md-12 col-sm-12" >
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[0]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[0]->image)}}" alt=""></a>
+</div>
+
+<div class="col-md-4" style="padding-right: 3px; padding-top: 5px;">
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[1]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[1]->image)}}" alt=""></a>
+</div>
+
+<div class="col-md-4" style="padding-left: 3px; padding-right: 3px; padding-top: 5px;">
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[2]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[2]->image)}}" alt=""></a>
+</div>
+
+<div class="col-md-4" style="padding-left: 3px; padding-top: 5px;">
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[3]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[3]->image)}}" alt=""></a>
+</div>
+
+@else
+
+<div class="col-md-12 col-sm-12" >
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[0]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[0]->image)}}" alt=""></a>
 </div>
 
 @endif
@@ -249,7 +299,49 @@ text-transform: uppercase;
 <div class="see-all-overlay" style="width: 90%;"><span class="see-all-overlay-text">ดูทั้งหมด {{$home_image_count}} รูป</span></div></a>
 </div>
 
-@else
+
+@elseif($home_image_count == 3)
+
+
+<div class="col-md-12 " >
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[0]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[0]->image)}}" alt=""></a>
+</div>
+
+<div class="col-md-6 col-xs-6" style="padding-right: 3px; padding-top: 5px;">
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[1]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[1]->image)}}" alt=""></a>
+</div>
+
+<div class="col-md-6 col-xs-6" style="padding-left: 3px; padding-top: 5px;">
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[2]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[2]->image)}}" alt=""></a>
+</div>
+
+@elseif($home_image_count == 4)
+
+
+<div class="col-md-12 " >
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[0]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[0]->image)}}" alt=""></a>
+</div>
+
+<div class="col-md-6 col-xs-4" style="padding-right: 3px; padding-top: 5px;">
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[1]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[1]->image)}}" alt=""></a>
+</div>
+
+<div class="col-md-6 col-xs-4" style="padding-left: 3px; padding-right: 3px; padding-top: 5px;">
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[2]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[2]->image)}}" alt=""></a>
+</div>
+
+<div class="col-md-6 col-xs-4" style="padding-left: 3px; padding-top: 5px;">
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[3]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[3]->image)}}" alt=""></a>
+</div>
+
+@elseif($home_image_count == 2)
 
 <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
 
@@ -262,6 +354,16 @@ text-transform: uppercase;
 <a class="example-image-link" href="{{url('assets/image/product/'.$home_image[1]->image)}}" >
 <img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[1]->image)}}" alt=""></a>
 </div>
+
+@else
+
+<div class="col-md-12" style="margin-bottom: 8px;">
+
+<a class="example-image-link" href="{{url('assets/image/product/'.$home_image[0]->image)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[0]->image)}}" alt=""></a>
+</div>
+
+
 
 @endif
 

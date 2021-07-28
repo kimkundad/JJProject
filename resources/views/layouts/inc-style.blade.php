@@ -108,6 +108,9 @@ ul#cart_items li .image img {
     width: auto;
     height: 53px;
 }
+#position ul li a:hover{
+  color: #333;
+}
 .wishlist a {
     color: #fff;
     cursor: pointer;

@@ -279,14 +279,14 @@ class ProshopController extends Controller
 
        for ($i = 0; $i < sizeof($gallary); $i++) {
 
-         $objs = DB::table('pro_image')
+         $objs = DB::table('pro_images')
            ->where('id', $gallary[$i])
            ->first();
 
            $file_path = 'assets/image/product/'.$objs->image;
            unlink($file_path);
 
-           DB::table('pro_image')->where('id', $objs->id)->delete();
+           DB::table('pro_images')->where('id', $objs->id)->delete();
        /*  $path = 'assets/cusimage/';
          $filename = time()."-".$gallary[$i]->getClientOriginalName();
          $gallary[$i]->move($path, $filename); */

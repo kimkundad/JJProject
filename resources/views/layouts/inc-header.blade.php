@@ -33,6 +33,10 @@
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="access_link">{{ substr(Auth::user()->name,0,15) }} <i class="icon-down-open-mini"></i></a>
                                 <div class="dropdown-menu" style="min-width: 160px;">
                                     <ul id="lang_menu">
+                                        
+                                            <li>
+                                                <a href="{{url('admin/user')}}"><i class="icon_set_1_icon-65"></i> แอดมินหลังบ้าน</a>
+                                            </li>
                                         <li><a href="{{url('my_account')}}"><i class="icon_set_1_icon-29"></i> บัญชีของฉัน</a>
                                         </li>
                                         <li><a href="{{ url('user_purchase') }}"><i class="icon_set_1_icon-50"></i> การซื้อของฉัน</a>
@@ -111,7 +115,11 @@
                  <li class="submenu visible-sm visible-xs">
                                 <a href="javascript:void(0);" class="show-submenu">บัญชีของ {{ substr(Auth::user()->name,0,15) }} <i class="icon-down-open-mini"></i></a>
                                 <ul>
-
+                                        @if(Auth::user()->is_admin == 1)
+                                            <li>
+                                                <a href="{{url('admin/user')}}"> แอดมินหลังบ้าน</a>
+                                            </li>
+                                        @endif
                                         <li><a href="{{url('my_account')}}"> บัญชีของฉัน</a>
                                         </li>
                                         <li><a href="{{ url('user_purchase') }}"> การซื้อของฉัน</a>

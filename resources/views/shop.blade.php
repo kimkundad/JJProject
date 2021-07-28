@@ -457,14 +457,14 @@ for($i=1;$i <= $total;$i++){
 
                               <div class="thumbnail a_sd_move">
                                         <div class="set_preview">
-                                        <a href="{{url('shop/'.$rans->id)}}">
+                                        <a href="{{url('shop/'.$rans->id_p)}}">
 
                                         <img src="{{url('assets/image/cusimage/'.$rans->images_shop11)}}" alt="{{$rans->name}}">
 
                                         </a></div>
                                         <div class="caption" style="padding: 3px;">
                                           <div class="descript bold">
-                                              <a href="{{url('shop/'.$rans->id)}}">{{ $rans->names }}</a>
+                                              <a href="{{url('shop/'.$rans->id_p)}}">{{ $rans->names }}</a>
                                           </div>
                                           <div class="descript" style="padding-bottom: 5px;color: #777; font-size: 12px;border-bottom: 1px dashed #dff0d8;">
                                           {{ $rans->name_c }}                       </div>

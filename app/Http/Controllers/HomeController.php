@@ -116,6 +116,24 @@ $data['category1'] = $cat;
     }
 
 
+
+    public function privacy(){
+      return view('privacy');
+    }
+
+    public function terms(){
+      return view('terms');
+    }
+
+    public function delete_account(){
+      return view('delete_account');
+    }
+
+    
+
+    
+
+
     public function presentation(){
 
         $cat = DB::table('categories')

@@ -33,9 +33,9 @@
               <div class="col-md-2 col-sm-3">
                   <h3>Discover</h3>
                   <ul>
-                    <!--  <li><a href="{{url('/history')}}">{{ trans('message.history') }}</a></li>
-                      <li><a href="{{url('/directions')}}">{{ trans('message.directions') }}</a></li> -->
-
+                      <li><a href="{{url('/privacy')}}">นโยบายความเป็นส่วนตัว</a></li>
+                      <li><a href="{{url('/terms')}}">ข้อกำหนดของบริการ</a></li> 
+                      <li><a href="{{url('/delete_account')}}">การลบข้อมูลผู้ใช้</a></li> 
 
                   </ul>
                 <h3>Languages</h3>

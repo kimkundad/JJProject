@@ -32,6 +32,10 @@ Route::post('/api/add_contact', 'HomeController@add_contact')->name('add_contact
 Route::post('/api/add_my_product_home', 'HomeController@add_my_product_home')->name('add_my_product_home');
 Route::post('/add_subscribe', 'HomeController@add_subscribe');
 Route::get('shop/{id}', 'HomeController@shop');
+Route::get('privacy', 'HomeController@privacy');
+Route::get('terms', 'HomeController@terms');
+Route::get('delete_account', 'HomeController@delete_account');
+
 
 Route::get('category/{id}', 'HomeController@category');
 Route::get('category/{id}/{ratting}', 'HomeController@category_rate');
@@ -63,6 +67,8 @@ Route::post('/add_order', 'HomeController@add_order');
 Route::get('confirmation/', 'HomeController@confirmation');
 
 Route::get('my_account/', 'ProfileController@my_account');
+Route::get('delete_my_account', 'ProfileController@delete_my_account');
+Route::get('api/delete_my_account/{id}', 'ProfileController@confirm_delete_my_account');
 
     
 });

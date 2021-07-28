@@ -12,6 +12,7 @@
 <div class="layer"></div>
 <!-- Mobile menu overlay mask -->
 
+
  <!-- Header================================================== -->
 <header class="" id="set-head">
     <div id="top_line">
@@ -45,6 +46,7 @@
                                         </li>
                                         <li><a href="{{ url('payment_notify') }}"><i class="im im-icon-Coin" style="margin-right:5px; margin-left:5px;"></i> แจ้งชำระเงินโอน </a>
                                         </li>
+                                        <li><a href="{{ url('delete_my_account') }}"><i class="icon_set_1_icon-94" ></i> ลบบัญชีของคุณ</a></li>
                                         <li><a href="{{ url('logout') }}"><i class="icon-lock" style="margin-right:5px; margin-left:5px;"></i> ออกจากระบบ </a>
                                         </li>
                                     </ul>
@@ -61,6 +63,7 @@
                                         </li>
                                         <li><a href="{{ url('payment_notify') }}"><i class="im im-icon-Coin" style="margin-right:5px; margin-left:5px;"></i> แจ้งชำระเงินโอน </a>
                                         </li>
+                                        <li><a href="{{ url('delete_my_account') }}"><i class="icon_set_1_icon-94" ></i> ลบบัญชีของคุณ</a></li>
                                         <li><a href="{{ url('logout') }}"><i class="icon-lock" style="margin-right:5px; margin-left:5px;"></i> ออกจากระบบ </a>
                                         </li>
                                         </ul>

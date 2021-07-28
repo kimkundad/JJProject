@@ -1,6 +1,5 @@
 /node_modules
 /public/hot
-/app/Providers/AppServiceProvider.php
 /public/storage
 /storage/*.key
 /vendor

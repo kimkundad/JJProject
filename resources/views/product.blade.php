@@ -239,11 +239,18 @@ text-transform: uppercase;
 <img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[3]->image)}}" alt=""></a>
 </div>
 
-@else
+@elseif($home_image_count == 1)
 
 <div class="col-md-12 col-sm-12" >
 <a class="example-image-link" href="{{url('assets/image/product/'.$home_image[0]->image)}}" >
 <img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[0]->image)}}" alt=""></a>
+</div>
+
+@else
+
+<div class="col-md-12 col-sm-12" >
+<a class="example-image-link" href="{{url('assets/image/product/'.$product->image_pro)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$product->image_pro)}}" alt=""></a>
 </div>
 
 @endif
@@ -355,7 +362,7 @@ text-transform: uppercase;
 <img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[1]->image)}}" alt=""></a>
 </div>
 
-@else
+@elseif($home_image_count == 1)
 
 <div class="col-md-12" style="margin-bottom: 8px;">
 
@@ -363,6 +370,14 @@ text-transform: uppercase;
 <img class="img-responsive example-image" src="{{url('assets/image/product/'.$home_image[0]->image)}}" alt=""></a>
 </div>
 
+@else
+
+
+
+<div class="col-md-12 col-sm-12" >
+<a class="example-image-link" href="{{url('assets/image/product/'.$product->image_pro)}}" >
+<img class="img-responsive example-image" src="{{url('assets/image/product/'.$product->image_pro)}}" alt=""></a>
+</div>
 
 
 @endif

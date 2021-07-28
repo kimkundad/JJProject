@@ -15,6 +15,7 @@ use App\bank;
 use App\pay_order;
 use App\order;
 use App\order_detail;
+use App\banner_img;
 
 
 
@@ -37,6 +38,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+      $ban = banner_img::where('status', 1)->orderby('sort', 'asc')->get();
+        $data['ban'] = $ban;
 
       $cat = DB::table('categories')
         ->whereBetween('id', [18, 22])

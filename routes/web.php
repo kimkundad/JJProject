@@ -96,4 +96,8 @@ Route::group(['middleware' => ['UserRole:manager|employee']], function() {
 	Route::post('add_gallery_shop_product', 'ProshopController@add_gallery_shop_product');
 	Route::post('property_image_del_product', 'ProshopController@property_image_del_product');
 
+	Route::resource('admin/banner', 'BannerController');
+	Route::post('api/post_status_banner', 'BannerController@post_status_banner');
+	Route::get('api/del_banner/{id}', 'BannerController@del_banner')->name('del_banner');
+
 });

@@ -522,13 +522,12 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
         <div class="row">                  
         <div class="col-md-12">
             
-            
-            <a href="#"><img src="{{url('img/banner_lazada4.jpg')}}" class="img-responsive margin-top-20" /></a>
-            <a href="#"><img src="{{url('img/banner_lazada2.png')}}" class="img-responsive margin-top-20" /></a>
-            <a href="#"><img src="{{url('img/banner_lazada1.png')}}" class="img-responsive margin-top-20" /></a>
-            <a href="#"><img src="{{url('img/banner_lazada3.png')}}" class="img-responsive margin-top-20" /></a>
-            <a href="#"><img src="{{url('img/banner_lazada5.png')}}" class="img-responsive margin-top-20" /></a>
-            
+            @if(isset($ban))
+              @foreach($ban as $u)
+              <a href="{{ $u->image_url }}"><img src="{{url('assets/banner/'.$u->image)}}" class="img-responsive margin-top-20" /></a>
+              @endforeach
+            @endif
+
           </div>
           </div>
       </div>

@@ -21,16 +21,16 @@ class CategoryController extends Controller
     {
 
 
-      $cat = DB::table('category')->select(
-            'category.*'
+      $cat = DB::table('categories')->select(
+            'categories.*'
             )
             ->get();
 
             $s = 1;
             foreach ($cat as $obj) {
                 $optionsRes = [];
-                $options = DB::table('product')->select(
-                  'product.*'
+                $options = DB::table('shops')->select(
+                  'shops.*'
                   )
                   ->where('category_id', $obj->id)
                   ->count();
@@ -94,14 +94,14 @@ class CategoryController extends Controller
         //
         $obj = category::find($id);
 
-        $cat = DB::table('products')->select(
-              'products.*',
-              'products.id as id_q',
-              'products.created_at as create',
+        $cat = DB::table('shops')->select(
+              'shops.*',
+              'shops.id as id_q',
+              'shops.created_at as create',
               'categories.*'
               )
-              ->leftjoin('categories', 'categories.id',  'products.cat_id')
-              ->where('products.cat_id', $id)
+              ->leftjoin('categories', 'categories.id',  'shops.cat_id')
+              ->where('shops.cat_id', $id)
               ->get();
 
 

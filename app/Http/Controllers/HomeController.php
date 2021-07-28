@@ -420,8 +420,25 @@ $data['category1'] = $cat;
            ->leftjoin('categories', 'categories.id',  'shops.category_id')
            ->where('shops.id', $id)
            ->first();
+
+
+
+           $ran = DB::table('shops')->select(
+            'shops.*',
+            'shops.id as id_p',
+            'shops.detail as details',
+            'shops.detail_en as details_en',
+            'shops.detail_cn as details_cn',
+            'shops.name as names',
+            'categories.*',
+            'categories.id as id_c',
+            'categories.name as name_c'
+            )
+    ->leftjoin('categories', 'categories.id',  'shops.category_id')
+    ->where('shops.category_id', $objs->id_c)
+    ->inRandomOrder()->limit(3)->get();
    
-       $ran = DB::table('shops')->where('category_id', $objs->id_c)->inRandomOrder()->limit(3)->get();
+     
    
    //dd($objs);
    

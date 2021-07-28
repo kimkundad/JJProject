@@ -465,10 +465,10 @@ for($i=1;$i <= $total;$i++){
                                         </a></div>
                                         <div class="caption" style="padding: 3px;">
                                           <div class="descript bold">
-                                              <a href="{{url('shop/'.$rans->id)}}">Se-w-up</a>
+                                              <a href="{{url('shop/'.$rans->id)}}">{{ $rans->names }}</a>
                                           </div>
                                           <div class="descript" style="padding-bottom: 5px;color: #777; font-size: 12px;border-bottom: 1px dashed #dff0d8;">
-                                            เสื้อผ้า/กางเกง                           </div>
+                                          {{ $rans->name_c }}                       </div>
 
                                           <div class="descript" style="height: 20px;">
                                             <span style="color: #777; font-size: 12px;"><i class="fa fa-heart " style="color:#e04f67"></i> {{$rans->view}}</span>

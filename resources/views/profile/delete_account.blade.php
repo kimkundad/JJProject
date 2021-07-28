@@ -27,7 +27,6 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                 </div>
             </div>
 
-
             <div class="container margin_60">
 
 
@@ -35,7 +34,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                 <h2 class="major"><span>ลบบัญชีของคุณ </span></h2>
             </div>
 
-            
+
 
             <div class="row">
                 <aside class="col-md-3">

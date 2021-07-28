@@ -459,8 +459,7 @@ for($i=1;$i <= $total;$i++){
                                         <div class="set_preview">
                                         <a href="{{url('shop/'.$rans->id)}}">
 
-                                        <img src="{{url('assets/image/cusimage/'.$rans->image)}}" alt="{{$rans->name}}">
-
+                                        <img src="{{url('assets/image/cusimage/'.$rans->images_shop11)}}" alt="{{$rans->name}}">
 
                                         </a></div>
                                         <div class="caption" style="padding: 3px;">

@@ -430,6 +430,7 @@ $data['category1'] = $cat;
             'shops.detail_en as details_en',
             'shops.detail_cn as details_cn',
             'shops.name as names',
+            'shops.image as images_shop11',
             'categories.*',
             'categories.id as id_c',
             'categories.name as name_c'

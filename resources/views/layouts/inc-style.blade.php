@@ -168,6 +168,9 @@ ul#cart_items li .image img {
 .bobo{
 
 }
+.ui.google.button {
+    background-color: #db4437;
+}
 .customized_notify.alert-info{
   text-align:center;background-color:#fff;width:310px;
   line-height:1.4;border:0;color:#777;padding:20px;-webkit-box-shadow:0 0 30px 0 rgba(0,0,0,.1);

@@ -112,8 +112,11 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                   <br>
                   <div class="form-group">
 
-                  <div style="margin-bottom: 16px;">
-                  <a href="{{url('redirect')}}" class=" ui facebook fluid button"><i class="fa fa-facebook icon-fa " style=""></i> ล็อกอินด้วย Facebook</a>
+                <div style="margin-bottom: 16px;">
+                  <a href="{{ route('social.oauth', 'facebook') }}" class=" ui facebook fluid button"><i class="fa fa-facebook " style=""></i> ล็อกอินด้วย Facebook</a>
+                </div>
+                <div style="margin-bottom: 16px;">
+                  <a href="{{ route('social.oauth', 'google') }}" class=" ui google fluid button"><i class="fa fa-google " style=""></i> ล็อกอินด้วย Google</a>
                 </div>
 
 

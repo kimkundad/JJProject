@@ -55,6 +55,8 @@ class SocialAuthController extends Controller
             return $this->sendFailedResponse($e->getMessage());
         }
 
+        dd($user);
+
         // check for email in returned user
         return empty( $user->email )
             ? $this->sendFailedResponse("No email id returned from {$driver} provider.")

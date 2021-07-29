@@ -55,7 +55,7 @@ class SocialAuthController extends Controller
             return $this->sendFailedResponse($e->getMessage());
         }
 
-        dd($user);
+      //  dd($user);
 
         // check for email in returned user
         return empty( $user->email )
@@ -70,7 +70,7 @@ class SocialAuthController extends Controller
     }
     protected function sendFailedResponse($msg = null)
     {
-        dd($msg);
+       // dd($msg);
         return redirect()->route('login')
             ->withErrors(['msg' => $msg ?: 'Unable to login, try with another provider to login.']);
     }
@@ -91,6 +91,7 @@ class SocialAuthController extends Controller
             ]);
         } else {
 
+            if($providerUser->getEmail() != null){
             // create a new user
             $user = User::create([
                 'name' => $providerUser->getName(),
@@ -103,6 +104,22 @@ class SocialAuthController extends Controller
                 // user can use reset password to create a password
                 'password' => ''
             ]);
+
+        }else{
+
+            $user = User::create([
+                'name' => $providerUser->getName(),
+                'email' => 'no_email',
+                'avatar' => $providerUser->getAvatar(),
+                'provider' => $driver,
+                'provider_id' => $providerUser->getId(),
+                'code_user' => $randomSixDigitInt,
+                'access_token' => $providerUser->token,
+                // user can use reset password to create a password
+                'password' => ''
+            ]);
+
+        }
 
 
         }

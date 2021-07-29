@@ -149,7 +149,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                     <div class="col-md-6 col-sm-6">
       								<div class="form-group">
       									<label><i class="icon-calendar-7"></i> วันที่โอน</label>
-      									<input class="date-pick form-control" name="day_pay" data-date-format="M d, D" type="text">
+      									<input class="date-pick form-control" name="day_pay" data-date-format="d-m-yy" type="text">
                                           @if ($errors->has('name_pay'))
                                         <div id="message-contact" style=""><div class="error_message">You must enter your Date Transfer.</div></div>
                                         @endif

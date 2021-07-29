@@ -524,7 +524,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
             
             @if(isset($ban))
               @foreach($ban as $u)
-              <a href="{{ $u->image_url }}"><img src="{{url('assets/banner/'.$u->image)}}" class="img-responsive margin-top-20" /></a>
+              <a target="_blank" href="{{ $u->image_url }}"><img src="{{url('assets/banner/'.$u->image)}}" class="img-responsive margin-top-20" /></a>
               @endforeach
             @endif
 

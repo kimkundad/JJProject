@@ -63,15 +63,12 @@ class SocialAuthController extends Controller
 
     protected function sendSuccessResponse()
     {
-      if(Session::has('status_user') == 1){
-       return redirect()->to('/vampireday');
-    }else{
-      return redirect()->intended('/');
-    }
+        return redirect()->intended('/');
 
     }
     protected function sendFailedResponse($msg = null)
     {
+        dd($msg);
         return redirect()->route('login')
             ->withErrors(['msg' => $msg ?: 'Unable to login, try with another provider to login.']);
     }
@@ -91,6 +88,7 @@ class SocialAuthController extends Controller
                 'access_token' => $providerUser->token
             ]);
         } else {
+
             // create a new user
             $user = User::create([
                 'name' => $providerUser->getName(),

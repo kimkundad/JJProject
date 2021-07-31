@@ -450,6 +450,27 @@ $data['category1'] = $cat;
 
       public function shop($id){
 
+
+        $sum_star = DB::table('review_shops')
+            ->where('product_id', $id)
+            ->where('status', 1)
+            ->sum('star');
+
+     $count_star = DB::table('review_shops')
+            ->where('product_id', $id)
+            ->where('status', 1)
+            ->count();
+            $data['count_star'] = $count_star;
+
+     $review = DB::table('review_shops')
+            ->where('product_id', $id)
+            ->where('status', 1)
+            ->paginate(15);
+
+            $data['review'] = $review;
+
+
+
         $package = shop::find($id);
         $package->view += 1;
         $package->save();
@@ -468,6 +489,17 @@ $data['category1'] = $cat;
            ->leftjoin('categories', 'categories.id',  'shops.category_id')
            ->where('shops.id', $id)
            ->first();
+
+
+           if($sum_star > 0){
+            $max = ceil($sum_star/$count_star);
+          
+          $data['max'] = $max;
+          }else{
+          
+          
+          $data['max'] = $objs->rating;
+          }
 
 
 
@@ -1065,18 +1097,11 @@ $data['category1'] = $cat;
             ->where('status', 1)
             ->sum('star');
 
-       //     dd($sum_star);
-
      $count_star = DB::table('review_products')
             ->where('product_id', $id)
             ->where('status', 1)
             ->count();
             $data['count_star'] = $count_star;
-
-            
-
-            
-
 
      $review = DB::table('review_products')
             ->where('product_id', $id)
@@ -1310,23 +1335,59 @@ $data['category1'] = $cat;
 public function post_review_shop(Request $request)
 {
 
-  $this->validate($request, [
-    'name_review' => 'required',
-    'star' => 'required'
-  ]);
+  if($request['name_review'] == null || $request['star'] == null){
 
-  //avatar
-  $ran = array("1483537975.png","1483556517.png","1483556686.png");
+    return redirect(url('product/'.$request['pro_id']))->with('add_error','เพิ่ม เสร็จเรียบร้อยแล้ว');
 
-          $package = new review_shop();
-          $package->avatar = $ran[array_rand($ran, 1)];
-          $package->product_id = $request['pro_id'];
-          $package->name = $request['name_review'];
-          $package->star = $request['star'];
-          $package->comment = $request['comment'];
-          $package->save();
+  }else{
 
-          return redirect(url('shop/'.$request['pro_id']))->with('add_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
+
+
+    $secret=env('reCAPTCHA');
+    //  $response = $request['captcha'];
+
+      $captcha = "";
+      if (isset($request["g-recaptcha-response"]))
+        $captcha = $request["g-recaptcha-response"];
+
+    //  $verify=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$response");
+      $response = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$captcha."&remoteip=".$_SERVER["REMOTE_ADDR"]), true);
+      //$captcha_success=json_decode($verify);
+
+    //  dd($captcha_success);
+
+    if($response["success"] == false) {
+
+      return redirect(url('shop/'.$request['pro_id']))->with('add_error','เพิ่ม เสร็จเรียบร้อยแล้ว');
+
+
+    }else{
+
+      $this->validate($request, [
+        'name_review' => 'required',
+        'star' => 'required'
+      ]);
+    
+      //avatar
+      $ran = array("1483537975.png","1483556517.png","1483556686.png");
+    
+              $package = new review_shop();
+              $package->avatar = $ran[array_rand($ran, 1)];
+              $package->product_id = $request['pro_id'];
+              $package->name = $request['name_review'];
+              $package->star = $request['star'];
+              $package->comment = $request['comment'];
+              $package->save();
+    
+              return redirect(url('shop/'.$request['pro_id']))->with('add_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
+
+    }
+
+  }
+
+  
+
+ 
 
 }
 

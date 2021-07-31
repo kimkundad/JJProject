@@ -501,7 +501,7 @@ text-transform: uppercase;
     @endforeach
     @endif
 
-        
+    <hr>
 
           
 
@@ -698,8 +698,8 @@ span {
         <div style="border-bottom: 1px dashed rgba(0,0,0,.09); padding-bottom:20px; padding-top:20px;">
           <span class="rating">
 
-            <?php
-            for($i=1;$i <= $product->rating;$i++){
+          <?php
+            for($i=1;$i <= $max;$i++){
             ?>
 
                             <i class="icon-star voted"></i>
@@ -709,7 +709,7 @@ span {
 
             <?php
             $total = 5;
-            $total -= $product->rating;
+            $total -= $max;
 
             for($i=1;$i <= $total;$i++){
             ?>

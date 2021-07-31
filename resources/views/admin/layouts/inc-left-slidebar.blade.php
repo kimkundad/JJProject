@@ -83,10 +83,25 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 									</li>
 
 
-                  <li {{ (Request::is('admin/set_text*') ? 'class=nav-expanded' : '') }} >
+                  					<li {{ (Request::is('admin/set_text*') ? 'class=nav-expanded' : '') }} >
 										<a href="{{url('admin/set_text/')}}"  >
 											<i class="fa fa-anchor" aria-hidden="true"></i>
 											<span>จัดการข้อความ</span>
+										</a>
+									</li>
+
+
+									<li {{ (Request::is('admin/review_shop*') ? 'class=nav-expanded' : '') }} >
+										<a href="{{url('admin/review_shop/')}}"  >
+											<i class="fa fa-comment" aria-hidden="true"></i>
+											<span>รีวิวร้านค้า</span>
+										</a>
+									</li>
+
+									<li {{ (Request::is('admin/review_product*') ? 'class=nav-expanded' : '') }} >
+										<a href="{{url('admin/review_product/')}}"  >
+											<i class="fa fa-comment-o" aria-hidden="true"></i>
+											<span>รีวิวสินค้า</span>
 										</a>
 									</li>
 

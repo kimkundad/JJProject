@@ -104,8 +104,9 @@ Route::group(['middleware' => ['UserRole:manager|employee']], function() {
 	Route::post('property_image_del_2', 'ShopController@property_image_del_2');
 	Route::resource('admin/proshop', 'ProshopController');
 	Route::post('api/api_post_status_shop', 'ProshopController@api_post_status_shop');
-  Route::post('api/api_post_status_product', 'ProshopController@api_post_status_product');
+    Route::post('api/api_post_status_product', 'ProshopController@api_post_status_product');
 
+  
 
 	Route::post('add_gallery_shop_product', 'ProshopController@add_gallery_shop_product');
 	Route::post('property_image_del_product', 'ProshopController@property_image_del_product');
@@ -113,5 +114,15 @@ Route::group(['middleware' => ['UserRole:manager|employee']], function() {
 	Route::resource('admin/banner', 'BannerController');
 	Route::post('api/post_status_banner', 'BannerController@post_status_banner');
 	Route::get('api/del_banner/{id}', 'BannerController@del_banner')->name('del_banner');
+
+	Route::get('admin/review_shop', 'ReviewController@review_shop');
+	Route::get('admin/review_product', 'ReviewController@review_product');
+	Route::post('api/post_status_re_shop', 'ReviewController@post_status_re_shop');
+    Route::post('api/post_status_re_product', 'ReviewController@post_status_re_product');
+
+	Route::get('api/del_review_shop/{id}', 'ReviewController@del_review_shop')->name('del_review_shop');
+	Route::get('api/del_review_product/{id}', 'ReviewController@del_review_product')->name('del_review_product');
+
+
 
 });

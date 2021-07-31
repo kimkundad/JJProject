@@ -86,26 +86,26 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
                     <span class="rating">
 
-<?php
-for($i=1;$i <= $objs->rating;$i++){
-?>
+                    <?php
+                                  for($i=1;$i <= $max;$i++){
+                                  ?>
 
-                          <i class="icon-star voted"></i>
-  <?php
-  }
-  ?>
+                                                  <i class="icon-star voted"></i>
+                                  <?php
+                                  }
+                                  ?>
 
-<?php
-$total = 5;
-$total -= $objs->rating;
+                                  <?php
+                                  $total = 5;
+                                  $total -= $max;
 
-for($i=1;$i <= $total;$i++){
-?>
+                                  for($i=1;$i <= $total;$i++){
+                                  ?>
 
-                         <i class="icon-star-empty"></i>
-  <?php
-  }
-  ?>
+                                                <i class="icon-star-empty"></i>
+                                  <?php
+                                  }
+                                  ?>
                         </span>
 
 
@@ -416,6 +416,143 @@ for($i=1;$i <= $total;$i++){
 
 
                               </div><!-- End col-md-9  -->
+
+                              <div class="col-md-12"><hr></div>
+
+                              <div class="col-md-3">
+                                  <h3>คะแนนของร้านค้า</h3>
+                                  <a href="#" class="btn_1 add_bottom_30" data-toggle="modal" data-target="#myReview">รีวิวร้านค้า</a>
+                              </div>
+
+                              <div class="col-lg-9">
+                                  <div id="general_rating">{{ $count_star }} รีวิว
+
+                                  <div class="rating">
+                                      <?php
+                                  for($i=1;$i <= $max;$i++){
+                                  ?>
+
+                                                  <i class="icon-star voted"></i>
+                                  <?php
+                                  }
+                                  ?>
+
+                                  <?php
+                                  $total = 5;
+                                  $total -= $max;
+
+                                  for($i=1;$i <= $total;$i++){
+                                  ?>
+
+                                                <i class="icon-star-empty"></i>
+                                  <?php
+                                  }
+                                  ?>
+                                      </div>
+
+                                  </div>
+                                  <hr>
+
+                                  @if(isset($review))
+              @foreach($review as $u)
+              <div class="review_strip_single">
+								<img src="{{ url('assets/images/avatar/'.$u->avatar) }}" alt="Image" class="rounded-circle" style="max-width:75px; max-height:75px;">
+								<small> - {{ formatDateThat($u->created_at) }} -</small>
+								<h4>{{ $u->name }}</h4>
+								<p>
+									"{{ $u->comment }}"
+								</p>
+								<div class="rating">
+                <?php
+            for($i=1;$i <= $u->star;$i++){
+            ?>
+
+                            <i class="icon-star voted"></i>
+            <?php
+            }
+            ?>
+
+            <?php
+            $total = 5;
+            $total -= $u->star;
+
+            for($i=1;$i <= $total;$i++){
+            ?>
+
+                           <i class="icon-star-empty"></i>
+            <?php
+            }
+            ?>
+								</div>
+							</div>
+              @endforeach
+              @endif
+
+              {{ $review->links() }}
+                              </div>
+
+
+                              <div class="modal fade" id="myReview" tabindex="-1" aria-labelledby="myReviewLabel" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="myReviewLabel">เขียนรีวิวร้านค้านี้</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                 
+                  <form method="post" action="{{ url('post_review_shop') }}" name="review_tour" >
+                  {{ csrf_field() }}
+                    <input name="pro_id" id="tour_name" type="hidden" value="{{ $objs->id_p }}">
+
+                    <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input name="name_review"  type="text" placeholder="ชื่อผู้ใช้งาน" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                    
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label>ให้คะแนนสินค้า</label>
+                          <select class="form-control" name="star" id="position_review">
+                            <option value="">เลือกดาวให้กับร้านค้า</option>
+                            <option value="1">1 ดาว แย่มาก </option>
+                            <option value="2">2 ดาว ราคาเหมาะสม</option>
+                            <option value="3">3 ดาว เฉยๆกับสินค้านี้</option>
+                            <option value="4">4 ดาว รู้สึกดี</option>
+                            <option value="5">5 ดาว ยอดเยี่ยมมาก</option>
+                          </select>
+                        </div>
+                      </div>
+                  
+                    </div>
+                    
+                    
+                    <!-- End row -->
+                    <div class="form-group">
+                      <textarea name="comment" id="review_text" class="form-control" style="height:100px" placeholder="แสดงความเห็นเกี่ยวกับร้านค้านี้"></textarea>
+                    </div>
+                    <div class="form-group">
+                    <div class="row" style="padding-left:18px;">
+                        <div class="col-md-12">
+                            <div >
+                                <div class="g-recaptcha" data-sitekey="6LdQnlkUAAAAAOfsIz7o-U6JSgrSMseulLvu7lI8"></div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <input type="submit" value="บันทึกข้อมูล" class="btn_1" id="submit-review">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
                           </div><!-- End row  -->
 
 
@@ -670,6 +807,39 @@ for($i=1;$i <= $total;$i++){
 @section('scripts')
 
 
+<script src='https://www.google.com/recaptcha/api.js?hl=th'></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+
+@if ($message = Session::get('add_error'))
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+
+  swal("กรุณากรอกข้อมูล รีวิว ให้ครบ");
+  
+  
+  
+    });
+</script>
+@endif
+
+
+@if ($message = Session::get('add_success'))
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+
+  swal("เพิ่มข้อมูลสำเร็จ!", "กรุณารอสักครู่ เพื่อการตรวจสอบของระบบ", "success");
+  
+
+  
+    });
+</script>
+@endif
 
 
   <div id="fb-root"></div>

@@ -38,7 +38,7 @@ Route::get('shop/{id}', 'HomeController@shop');
 Route::get('privacy', 'HomeController@privacy');
 Route::get('terms', 'HomeController@terms');
 Route::get('delete_account', 'HomeController@delete_account');
-
+Route::get('/all_shop', 'HomeController@all_shop');
 
 Route::get('category/{id}', 'HomeController@category');
 Route::get('category/{id}/{ratting}', 'HomeController@category_rate');
@@ -56,8 +56,8 @@ Route::get('/confirm_payment', 'HomeController@confirm_payment');
 Route::get('product/{id}', 'HomeController@product');
 Route::post('/add_session_value', 'HomeController@add_session_value');
 Route::get('deleteCart/{id}', 'HomeController@deleteCart');
-
-
+Route::post('/post_review_product', 'HomeController@post_review_product');
+Route::post('/post_review_shop', 'HomeController@post_review_shop');
 
 
 Route::group(['middleware' => ['UserRole:manager|employee|customer']], function() {
@@ -73,7 +73,12 @@ Route::get('my_account/', 'ProfileController@my_account');
 Route::get('delete_my_account', 'ProfileController@delete_my_account');
 Route::get('api/delete_my_account/{id}', 'ProfileController@confirm_delete_my_account');
 
-    
+Route::get('my_account/{id}/edit', 'ProfileController@edit_my_account');
+Route::post('post_edit_profile', 'ProfileController@post_edit_profile')->name('post_edit_profile');
+Route::get('/payment_notify', 'ProfileController@payment_notify');
+Route::get('/user_purchase', 'ProfileController@user_purchase');
+
+
 });
 
 

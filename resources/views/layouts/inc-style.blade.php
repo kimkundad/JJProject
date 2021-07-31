@@ -168,6 +168,31 @@ ul#cart_items li .image img {
 .bobo{
 
 }
+a.btn.btn-submit, a.btn.btn-submit:focus, a.btn.btn-submit:active:focus, a.btn.btn-submit.active:focus {
+    background: #ffd430;
+    color: #333;
+        padding: 6px 20px;
+        font-size: 14px;
+}
+a.btn.btn-submit:hover {
+        padding: 6px 20px;
+    background: #e8c025;
+    color: #333;
+    font-size: 14px;
+}
+button.btn.btn-submit, button.btn.btn-submit:focus, button.btn.btn-submit:active:focus, button.btn.btn-submit.active:focus {
+    background: #ffd430;
+    color: #333;
+        padding: 6px 20px;
+        font-size: 14px;
+}
+button.btn.btn-submit:hover {
+        padding: 6px 20px;
+    background: #e8c025;
+    color: #333;
+    font-size: 14px;
+}
+
 .ui.google.button {
     background-color: #db4437;
 }
@@ -186,4 +211,21 @@ ul#cart_items li .image img {
   .customized_notify.alert-danger h4{color:#333;font-size:14px;margin-bottom:5px;text-transform:uppercase;font-weight:700}
   .customized_notify.alert-danger i span{font-size:55px;margin-bottom:0;color:red;display:inline-block}
 [data-notify=progressbar]{margin-bottom:0;position:absolute;bottom:0;left:0;width:100%;height:5px}
+
+
+.tabs nav li.tab-current {
+    border: 1px solid #e2e2e2;
+    box-shadow: inset 0 2px #e2e2e2;
+    border-bottom: none;
+    z-index: 100;
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.hotel_booking h3.hotel_booking:before {
+    content: '\52';
+}
 </style>

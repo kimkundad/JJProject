@@ -86,7 +86,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                       <div class="col-md-6 col-sm-6">
                           <div class="form-group">
                               <label>หมายเลขรายการสั่งซื้อ</label>
-                              <input type="text" id="no_pay" name="no_pay" class="form-control" >
+                              <input type="text" id="no_pay" name="no_pay" value="{{ $order_id }}" class="form-control" >
                               @if ($errors->has('name_pay'))
                                 <div id="message-contact" style=""><div class="error_message">You must enter your Order Number.</div></div>
                                 @endif

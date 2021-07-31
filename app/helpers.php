@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\DB;
 
 function formatDateThat($strDate)
 {
-    $strYear = date("Y",strtotime($strDate))+543;
+    $strYear = date("Y",strtotime($strDate));
     $strMonth= date("n",strtotime($strDate));
     $strDay= date("j",strtotime($strDate));
     $strHour= date("H",strtotime($strDate));

@@ -21,7 +21,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
             	<div class="container">
                         	<ul>
                             <li><a href="{{url('/')}}">{{ trans('message.index') }}</a></li>
-                            <li><a href="#">{{ trans('message.category') }}</a></li>
+                            <li><a href="#">ลบบัญชีของคุณ</a></li>
 
                             </ul>
                 </div>

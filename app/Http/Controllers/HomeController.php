@@ -17,6 +17,9 @@ use App\order;
 use App\order_detail;
 use App\banner_img;
 
+use App\review_product;
+use App\review_shop;
+
 
 
 class HomeController extends Controller
@@ -131,7 +134,30 @@ $data['category1'] = $cat;
 
     
 
-    
+    public function all_shop(){
+
+      $shop = DB::table('shops')->select(
+            'shops.*'
+            )
+            ->where('first', 1)
+            ->orderBy('priority', 'asc')
+            ->limit(12)
+            ->get();
+ 
+      $options = DB::table('shops')->select(
+          'shops.*'
+          )
+          ->orderBy('rating', 'desc')
+          ->paginate(16);
+ 
+     $data['options'] = $options;
+     $data['shop'] = $shop;
+     $set_point = 0;
+     $data['set_point'] = $set_point;
+     return view('all_shop', $data);
+ 
+    }
+ 
 
 
     public function presentation(){
@@ -889,10 +915,12 @@ $data['category1'] = $cat;
 
   }
 
-  public function confirm_payment(){
+  public function confirm_payment(Request $request){
 
+    $id = $request['id'];
     $bank = bank::all();
     $data['bank'] = $bank;
+    $data['order_id'] = $id;
     return view('confirm_payment', $data);
   }
 
@@ -1032,6 +1060,32 @@ $data['category1'] = $cat;
 
      //dd(Session::get('cart'));
 
+     $sum_star = DB::table('review_products')
+            ->where('product_id', $id)
+            ->where('status', 1)
+            ->sum('star');
+
+       //     dd($sum_star);
+
+     $count_star = DB::table('review_products')
+            ->where('product_id', $id)
+            ->where('status', 1)
+            ->count();
+            $data['count_star'] = $count_star;
+
+            $max = ceil($sum_star/$count_star);
+            
+            $data['max'] = $max;
+
+
+     $review = DB::table('review_products')
+            ->where('product_id', $id)
+            ->where('status', 1)
+            ->paginate(15);
+
+            $data['review'] = $review;
+
+
      $cart = Session::get('cart');
 
      //dd($cart['2']);
@@ -1060,10 +1114,28 @@ $data['category1'] = $cat;
            ->where('products.id', $id)
            ->first();
 
+
+           $product_ran = DB::table('products')->select(
+            'products.*',
+            'products.id as idp',
+            'products.detail as detailss',
+            'categories.*'
+            )
+            ->leftjoin('categories', 'categories.id',  'products.cat_id')
+            ->where('products.status', 1)
+            ->where('products.id', '!=', $id)
+            ->where('products.cat_id', $product->cat_id)
+            ->inRandomOrder()->limit(3)->get();
+
+        
+            
+            $data['product_ran'] = $product_ran;
            $data['product'] = $product;
            return view('product', $data);
 
   }
+
+
 
 
   public function add_session_value(Request $request){
@@ -1163,6 +1235,89 @@ $data['category1'] = $cat;
  
     }
 
+
+
+    public function post_review_product(Request $request)
+{
+
+  if($request['name_review'] == null || $request['star'] == null){
+
+    return redirect(url('product/'.$request['pro_id']))->with('add_error','เพิ่ม เสร็จเรียบร้อยแล้ว');
+
+  }else{
+
+
+
+    $secret=env('reCAPTCHA');
+    //  $response = $request['captcha'];
+
+      $captcha = "";
+      if (isset($request["g-recaptcha-response"]))
+        $captcha = $request["g-recaptcha-response"];
+
+    //  $verify=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$response");
+      $response = json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".$secret."&response=".$captcha."&remoteip=".$_SERVER["REMOTE_ADDR"]), true);
+      //$captcha_success=json_decode($verify);
+
+    //  dd($captcha_success);
+
+    if($response["success"] == false) {
+
+      return redirect(url('product/'.$request['pro_id']))->with('add_error','เพิ่ม เสร็จเรียบร้อยแล้ว');
+
+
+    }else{
+
+      $this->validate($request, [
+        'name_review' => 'required',
+        'star' => 'required'
+      ]);
+    
+      //avatar
+      $ran = array("1483537975.png","1483556517.png","1483556686.png");
+    
+              $package = new review_product();
+              $package->avatar = $ran[array_rand($ran, 1)];
+              $package->product_id = $request['pro_id'];
+              $package->name = $request['name_review'];
+              $package->star = $request['star'];
+              $package->comment = $request['comment'];
+              $package->save();
+    
+              return redirect(url('product/'.$request['pro_id']))->with('add_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
+
+    }
+
+  }
+
+  
+
+ 
+
+}
+
+public function post_review_shop(Request $request)
+{
+
+  $this->validate($request, [
+    'name_review' => 'required',
+    'star' => 'required'
+  ]);
+
+  //avatar
+  $ran = array("1483537975.png","1483556517.png","1483556686.png");
+
+          $package = new review_shop();
+          $package->avatar = $ran[array_rand($ran, 1)];
+          $package->product_id = $request['pro_id'];
+          $package->name = $request['name_review'];
+          $package->star = $request['star'];
+          $package->comment = $request['comment'];
+          $package->save();
+
+          return redirect(url('shop/'.$request['pro_id']))->with('add_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
+
+}
 
 
     public function add_order(Request $request){

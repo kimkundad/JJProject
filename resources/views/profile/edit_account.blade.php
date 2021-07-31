@@ -19,7 +19,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
             	<div class="container">
                         	<ul>
                             <li><a href="{{url('/')}}">{{ trans('message.index') }}</a></li>
-                            <li><a href="#">บัญชีของฉัน</a></li>
+                            <li><a href="#">{{ trans('message.category') }}</a></li>
 
                             </ul>
                 </div>
@@ -55,31 +55,52 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                 <div class="col-md-9">
                     <h3>บัญชีของฉัน </h3>
                     <br />
-                    <table class="table ">
-                      <tbody>
+                    <form class="form-horizontal" action="{{url('post_edit_profile')}}" method="post" enctype="multipart/form-data">
+
+											{{ csrf_field() }}
+
+                      <div class="form-group">
+                        <label class="col-md-3 control-label" for="profileFirstName">ชื่อผู้ใช้งาน</label>
+                        <div class="col-md-8">
+                          <input type="text" class="form-control" name="name" value="{{ $objs->name }}" >
+                          <input type="hidden" class="form-control" name="user_id" value="{{ $objs->id }}" >
+                            <br />
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-3 control-label" for="profileCompany">อีเมล</label>
+                        <div class="col-md-8">
+                          <input type="text" class="form-control" name="email" value="{{ $objs->email }}"  readonly>
+                          <br />
+                          @if ($message = Session::get('error'))
+                          <p class="text-danger">
+                            <b>Email ที่ท่านต้องการเปลี่ยน นี้มีผู้ใช้แล้ว</b>
+                          </p>
+                          @endif
+
+                        </div>
+                      </div>
 
 
-                        <tr>
-                          <td>ชื่อผู้ใช้งาน</td><td>{{Auth::user()->name}}</td>
-                        </tr>
-                        <tr>
-                          <td>อีเมล</td><td>{{Auth::user()->email}}</td>
-                          </tr>
-
-                          <tr>
-                          <td>เบอร์โทรศัพท์มือถือ</td><td>{{Auth::user()->phone}}</td>
-                          </tr>
-
-                          <tr>
+                      <div class="form-group">
+                        <label class="col-md-3 control-label" for="profileCompany">เบอร์โทรศัพท์มือถือ</label>
+                        <div class="col-md-8">
+                          <input type="number" class="form-control" name="phone" value="{{ $objs->phone }}"  >
+                          <br />
+                        </div>
+                      </div>
 
 
+               
+                      
 
+                    <div class="col-md-12 text-center" >
 
-
-                      </tbody>
-                    </table>
-                    <br />
-                  <a href="{{url('my_account/'.Auth::user()->id.'/edit')}}" class="btn btn-submit">แก้ไขบัญชีของฉัน</a>
+                    <button type="submit" class="btn btn-submit">อัพเดทข้อมูล</button>
+                    <a href="{{url('my_account')}}" class="btn btn-default">ยกเลิก</a>
+                  </div>
+                    </form>
                 </div>
             </div>
 
@@ -102,39 +123,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 @section('scripts')
 
 
-@if ($message = Session::get('edit_success'))
-<script type="text/javascript">
 
 
-    $(function(){
-      // bind change event to select
-
-      $.notify({
-          // options
-          icon: 'icon_set_1_icon-76',
-          title: "<h4>อัพเดทข้อมุลสำเร็จ</h4> ",
-          message: "",
-        },{
-          // settings
-          type: 'info',
-          delay: 5000,
-          timer: 3000,
-          z_index: 9999,
-          showProgressbar: false,
-          placement: {
-            from: "bottom",
-            align: "right"
-          },
-          animate: {
-            enter: 'animated bounceInUp',
-            exit: 'animated bounceOutDown'
-          },
-        });
-
-
-    });
-
-</script>
-@endif
 
 @stop('scripts')

@@ -1120,7 +1120,7 @@ $data['category1'] = $cat;
           
           $data['max'] = $max;
           }else{
-            $max = ceil($sum_star/$count_star);
+          
           
           $data['max'] = $product->rating;
           }

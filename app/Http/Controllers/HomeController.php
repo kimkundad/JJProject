@@ -1073,9 +1073,9 @@ $data['category1'] = $cat;
             ->count();
             $data['count_star'] = $count_star;
 
-            $max = ceil($sum_star/$count_star);
             
-            $data['max'] = $max;
+
+            
 
 
      $review = DB::table('review_products')
@@ -1113,6 +1113,17 @@ $data['category1'] = $cat;
            ->where('products.status', 1)
            ->where('products.id', $id)
            ->first();
+
+
+           if($sum_star > 0){
+            $max = ceil($sum_star/$count_star);
+          
+          $data['max'] = $max;
+          }else{
+            $max = ceil($sum_star/$count_star);
+          
+          $data['max'] = $product->rating;
+          }
 
 
            $product_ran = DB::table('products')->select(

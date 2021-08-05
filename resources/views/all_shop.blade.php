@@ -16,6 +16,12 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 .juicer-feed h1.referral{
   display: none !important;
 }
+.img_container {
+    min-height: 188px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #fff;
+}
 </style>
 
 <section class="parallax-window" data-parallax="scroll" data-image-src="{{url('assets/img/home_bg_3.jpg')}}" data-natural-width="1400" data-natural-height="370">

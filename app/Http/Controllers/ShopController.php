@@ -60,33 +60,33 @@ class ShopController extends Controller
             ->where('product_id', $id)
             ->get();
 
-      if(isset($image_all)){
+  /*    if(isset($image_all)){
         foreach ($image_all as $u) {
             DB::table('product_images')->where('id', $u->id)->delete();
             $file_path = 'assets/image/cusimage/'.$u->image;
             unlink($file_path);
         }
-      }
+      } */
 
       $image_all2 =   $objs = DB::table('product_image1s')
             ->where('product_id', $id)
             ->get();
 
-      if(isset($image_all2)){
+    /*  if(isset($image_all2)){
         foreach ($image_all2 as $u) {
             DB::table('product_image1s')->where('id', $u->id)->delete();
             $file_path = 'assets/image/cusimage/'.$u->image;
             unlink($file_path);
         }
-      }
+      } */
 
 
       $objs = DB::table('shops')
             ->where('id', $id)
             ->first();
 
-      $file_path = 'assets/image/cusimage/'.$objs->image;
-      unlink($file_path);
+   /*   $file_path = 'assets/image/cusimage/'.$objs->image;
+      unlink($file_path); */
 
       DB::table('shops')->where('id', $objs->id)->delete();
 

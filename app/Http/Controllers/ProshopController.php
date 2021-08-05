@@ -321,7 +321,7 @@ class ProshopController extends Controller
     ]);
 
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -344,6 +344,7 @@ class ProshopController extends Controller
         unlink($file_path);
       }
 
+      
         $objs = DB::table('products')
         ->select(
            'products.*'

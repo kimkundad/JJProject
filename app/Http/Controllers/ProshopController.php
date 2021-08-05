@@ -332,6 +332,7 @@ class ProshopController extends Controller
     public function destroy($id)
     {
         //
+        
         $image_all =   $objs = DB::table('pro_images')
             ->select(
                'pro_images.*'
@@ -344,7 +345,7 @@ class ProshopController extends Controller
         unlink($file_path);
       }
 
-      
+
         $objs = DB::table('products')
         ->select(
            'products.*'

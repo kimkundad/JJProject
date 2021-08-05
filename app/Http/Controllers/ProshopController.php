@@ -321,6 +321,7 @@ class ProshopController extends Controller
     ]);
 
     }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -96,6 +96,7 @@ Route::group(['middleware' => ['UserRole:manager|employee']], function() {
 	Route::resource('admin/category', 'CategoryController');
 	Route::resource('admin/shop', 'ShopController');
 	Route::post('api/post_status_order', 'ShopController@post_status_order');
+	Route::get('api/del_shop_id/{id}', 'ShopController@del_shop_id')->name('del_shop_id');
 
 	Route::post('add_gallery_shop', 'ShopController@add_gallery_shop');
 	Route::post('property_image_del', 'ShopController@property_image_del');

@@ -106,7 +106,7 @@
   												<div class="dropdown-menu" role="menu">
 
   												<a class="dropdown-item text-1" href="{{url('admin/shop/'.$u->id_q.'/edit')}}">แก้ไข</a>
-  													<!--	<a class="dropdown-item text-1 text-danger" href="">ลบ</a> -->
+  												<a class="dropdown-item text-1 text-danger" onclick="return confirm('Are you sure?')" href="{{ url('api/del_shop_id/'.$u->id_q) }}">ลบ</a>
 
   												</div>
   											</div>

@@ -22,6 +22,18 @@ class ShopController extends Controller
      */
     public function index()
     {
+
+      $count = DB::table('shops')->select(
+        'shops.*',
+        'shops.id as id_q',
+        'shops.name as name_q',
+        'categories.*'
+        )
+        ->leftjoin('categories', 'categories.id',  'shops.category_id')
+        ->count();
+
+        $data['count'] = $count;
+
         //
         $cat = DB::table('shops')->select(
               'shops.*',
@@ -38,6 +50,50 @@ class ShopController extends Controller
 
 
         return view('admin.shop.index', $data);
+    }
+
+
+
+    public function del_shop_id($id){
+
+      $image_all =   $objs = DB::table('product_images')
+            ->where('product_id', $id)
+            ->get();
+
+      if(isset($image_all)){
+        foreach ($image_all as $u) {
+            DB::table('product_images')->where('id', $u->id)->delete();
+            $file_path = 'assets/image/cusimage/'.$u->image;
+            unlink($file_path);
+        }
+      }
+
+      $image_all2 =   $objs = DB::table('product_image1s')
+            ->where('product_id', $id)
+            ->get();
+
+      if(isset($image_all2)){
+        foreach ($image_all2 as $u) {
+            DB::table('product_image1s')->where('id', $u->id)->delete();
+            $file_path = 'assets/image/cusimage/'.$u->image;
+            unlink($file_path);
+        }
+      }
+
+
+      $objs = DB::table('shops')
+            ->where('id', $id)
+            ->first();
+
+      $file_path = 'assets/image/cusimage/'.$objs->image;
+      unlink($file_path);
+
+      DB::table('shops')->where('id', $objs->id)->delete();
+
+      return redirect(url('admin/shop/'))->with('delete','คุณทำการเพิ่มอสังหา สำเร็จ');
+
+
+
     }
 
     public function search_shop(Request $request){

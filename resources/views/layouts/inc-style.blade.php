@@ -228,4 +228,12 @@ button.btn.btn-submit:hover {
 .hotel_booking h3.hotel_booking:before {
     content: '\52';
 }
+.btn-next{
+	background: #ffd430;
+    color: #333;
+}
+.btn-next:hover{
+	background: #ecc52e;
+    color: #333;
+}
 </style>

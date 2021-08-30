@@ -544,3 +544,12 @@ i.color_1{color:#e04f67}i.color_2{color:#1cbbb4}i.color_3{color:#82ca9c}i.color_
 [data-notify=progressbar]{margin-bottom:0;position:absolute;bottom:0;left:0;width:100%;height:5px}
 
 .customized_notify.alert-info{text-align:center;background-color:#fff;width:310px;line-height:1.4;border:0;color:#777;padding:20px;-webkit-box-shadow:0 0 30px 0 rgba(0,0,0,.1);-moz-box-shadow:0 0 30px 0 rgba(0,0,0,.1);box-shadow:0 0 30px 0 rgba(0,0,0,.1)}.customized_notify.alert-info h4{color:#333;font-size:14px;margin-bottom:5px;text-transform:uppercase;font-weight:700}.customized_notify i span{font-size:55px;margin-bottom:0;color:#6C6;display:inline-block}.customized_notify i span img{border:5px solid #ededed;width:80px;height:auto;margin-bottom:10px;-webkit-border-radius:50%;-moz-border-radius:50%;border-radius:50%}.search-overlay-menu{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.9);-webkit-transition:transform .3s ease 0s,opacity .3s ease 0s,visibility 0s ease .3s;-moz-transition:transform .3s ease 0s,opacity .3s ease 0s,visibility 0s ease .3s;-ms-transition:transform .3s ease 0s,opacity .3s ease 0s,visibility 0s ease .3s;-o-transition:transform .3s ease 0s,opacity .3s ease 0s,visibility 0s ease .3s;transition:transform .3s ease 0s,opacity .3s ease 0s,visibility 0s ease .3s;opacity:0;visibility:hidden;z-index:999999;text-align:center}.search-overlay-menu.open{opacity:1;visibility:visible;-webkit-transition:opacity .3s ease 0s,transform .3s ease 0s;-moz-transition:opacity .3s ease 0s,transform .3s ease 0s;-ms-transition:opacity .3s ease 0s,transform .3s ease 0s;-o-transition:opacity .3s ease 0s,transform .3s ease 0s;transition:opacity .3s ease 0s,transform .3s ease 0s}.search-overlay-menu form{height:70px;position:absolute;top:50%;margin:-35px auto 0;width:60%;left:20%;transform:translateY(20px);-moz-transform:translateY(20px);-ms-transform:translateY(20px);-o-transform:translateY(20px);-webkit-transform:translateY(20px);transition:all .3s ease-in-out 0s;-moz-transition:all .3s ease-in-out 0s;-o-transition:all .3s ease-in-out 0s;-webkit-transition:all .3s ease-in-out 0s}
+
+.btn-next{
+	background: #ffd430;
+    color: #333;
+}
+.btn-next:hover{
+	background: #ecc52e;
+    color: #333;
+}

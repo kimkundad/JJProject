@@ -16,9 +16,10 @@ use App\pay_order;
 use App\order;
 use App\order_detail;
 use App\banner_img;
-
+use App\address;
 use App\review_product;
 use App\review_shop;
+
 
 
 
@@ -957,6 +958,129 @@ $data['category1'] = $cat;
   }
 
 
+  public function post_payment_notify(Request $request){
+
+    $order = order::where('lastname_order', $request['order_id'])->first();
+
+    $image = $request->file('files');
+
+    if($image == NULL){
+
+      $this->validate($request, [
+              'order_id' => 'required',
+              'money' => 'required',
+              'bank' => 'required',
+              'filter_date' => 'required'
+          ]);
+
+          $time = $request['time2_tran'].':'.$request['time3_tran'];
+
+
+     $package = new pay_order();
+     $package->name_pay = $order->name_order;
+     $package->phone_pay = $order->telephone_order;
+     $package->no_pay = $request['order_id'];
+     $package->money_pay = $request['money'];
+     $package->bank = $request['bank'];
+     $package->day_pay = $request['filter_date'];
+     $package->time_pay = $time;
+     $package->message_pay = 'แจ้งชำระเงิน';
+     $package->email_pay = $order->email_order;
+     $package->save();
+
+    }else{
+
+      $image = $request->file('files');
+
+      $this->validate($request, [
+            'order_id' => 'required',
+            'money' => 'required',
+            'bank' => 'required',
+            'filter_date' => 'required'
+          ]);
+
+
+
+          $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
+
+      $destinationPath = asset('assets/image/payment/');
+      $img = Image::make($image->getRealPath());
+      $img->resize(800, 533, function ($constraint) {
+      $constraint->aspectRatio();
+    })->save('assets/image/payment/'.$input['imagename']);
+
+    $time = $request['time2_tran'].':'.$request['time3_tran'];
+
+
+          $package = new pay_order();
+          $package->name_pay = $order->name_order;
+          $package->phone_pay = $order->telephone_order;
+          $package->no_pay = $request['order_id'];
+          $package->money_pay = $request['money'];
+          $package->bank = $request['bank'];
+          $package->day_pay = $request['filter_date'];
+          $package->time_pay = $time;
+          $package->message_pay = 'แจ้งชำระเงิน';
+          $package->email_pay = $order->email_order;
+          $package->files_pay = $input['imagename'];
+          $package->save();
+
+    }
+
+    $the_id = $package->id;
+    $pay = pay_order::find($the_id);
+
+
+
+    // send email
+        $details = array();
+      //  $data_toview['pathToImage'] = "assets/image/email-head.jpg";
+        date_default_timezone_set("Asia/Bangkok");
+        $details['name_pay'] = $pay->name_pay;
+        $details['phone_pay'] = $pay->phone_pay;
+        $details['no_pay'] = $pay->no_pay;
+        $details['money_pay'] = $pay->money_pay;
+        $details['bank'] = $pay->bank;
+        $details['day_pay'] = $pay->day_pay;
+        $details['time_pay'] = $pay->time_pay;
+        $details['message_pay'] = $pay->message_pay;
+        $details['files_pay'] = $pay->files_pay;
+        $details['email_pay'] = $pay->email_pay;
+        
+
+        \Mail::to($pay->email_pay)->send(new \App\Mail\ConFirmPay($details));
+
+
+        $message = "แจ้งชำระเงินโดย ".$pay->name_pay.", ข้อมูลผู้ติดต่อ : ".$pay->phone_pay.", ".$pay->email_pay." หมายเลขสั่งซื้อ : ".$pay->no_pay." จำนวนเงิน : ".$pay->money_pay;
+        $lineapi = env('line_token');
+        
+
+        $mms =  trim($message);
+        $chOne = curl_init();
+        curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
+        curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($chOne, CURLOPT_POST, 1);
+        curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=$mms");
+        curl_setopt($chOne, CURLOPT_FOLLOWLOCATION, 1);
+        $headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer '.$lineapi.'',);
+        curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
+        $result = curl_exec($chOne);
+        if(curl_error($chOne)){
+        echo 'error:' . curl_error($chOne);
+        }else{
+        $result_ = json_decode($result, true);
+    //    echo "status : ".$result_['status'];
+    //    echo "message : ". $result_['message'];
+        }
+        curl_close($chOne);
+        
+
+    return redirect(url('order_complete/'.$request['order_id']))->with('aadd_success','คุณทำการเพิ่มอสังหา สำเร็จ');
+
+  }
+
 
   public function add_confirm_payment(Request $request){
 
@@ -1263,8 +1387,71 @@ $data['category1'] = $cat;
 
     }
 
-    public function payment(){
+    
 
+    public function shipping(){
+      $id = Auth::user()->id;
+      $add = DB::table('addresses')
+              ->where('user_id', $id)
+              ->first();
+
+            
+      
+      $data['add'] = $add;
+      $data['user_id'] = $id;
+
+      $provinces = DB::table('provinces')->get();
+      $data['provinces'] = $provinces;
+      return view('shipping', $data);
+ 
+    }
+
+
+    public function pay_order_detail($id){
+      $order = order::where('lastname_order', $id)->first();
+      $sum_item = DB::table('order_details')
+              ->where('order_id', $order->id)
+              ->sum('product_total');
+
+      $data['id'] = $id;
+      $data['order'] = $order;
+      $data['sum_item'] = $sum_item;
+
+      $bank = bank::where('status', 1)->get();
+      $data['bank'] = $bank;
+
+      return view('pay_order_detail', $data);
+    }
+
+
+    public function order_complete($id){
+
+      $order = order::where('lastname_order', $id)->first();
+
+      $sum_item = DB::table('order_details')
+              ->where('order_id', $order->id)
+              ->sum('product_total');
+
+
+      $data['order'] = $order;
+      $data['sum_item'] = $sum_item;
+
+      return view('order_complete', $data);
+
+    }
+
+    public function payment($id){
+      
+      $order = order::where('lastname_order', $id)->first();
+
+      $sum_item = DB::table('order_details')
+              ->where('order_id', $order->id)
+              ->sum('product_total');
+
+      $data['order'] = $order;
+      $data['sum_item'] = $sum_item;
+      $bank = bank::where('status', 1)->get();
+      $data['bank'] = $bank;
       $provinces = DB::table('provinces')->get();
       $data['provinces'] = $provinces;
       return view('payment', $data);
@@ -1390,6 +1577,108 @@ public function post_review_shop(Request $request)
  
 
 }
+
+
+public function add_my_address(Request $request){
+
+  $this->validate($request, [
+    'name_order' => 'required',
+    'telephone_order' => 'required',
+    'country_order' => 'required',
+    'street_order' => 'required',
+    'email' => 'required',
+    'postal_code_order' => 'required'
+]);
+
+  $check = address::where('user_id', Auth::user()->id)->count();
+
+  if($check == 0){
+
+    $objs = new address();
+    $objs->user_id = Auth::user()->id;
+    $objs->name = $request['name_order'];
+    $objs->phone = $request['telephone_order'];
+    $objs->email = $request['email'];
+    $objs->province = $request['country_order'];
+    $objs->postal_code = $request['postal_code_order'];
+    $objs->address = $request['street_order'];
+    $objs->save();
+
+  }
+
+
+          $randomSixDigitInt = 'ORDER'.(\random_int(1000000, 9999999));
+
+          $package = new order();
+          $package->user_id = Auth::user()->id;
+          $package->name_order = $request['name_order'];
+          $package->lastname_order = $randomSixDigitInt;
+          $package->telephone_order = $request['telephone_order'];
+          $package->email_order = $request['email'];
+          $package->country_order = $request['country_order'];
+          $package->postal_code_order = $request['postal_code_order'];
+          $package->street_order = $request['street_order'];
+          $package->total = $request['total'];
+          $package->shipping_price = $request['shipping_price'];
+          $package->save();
+ 
+          $the_id = $package->id;
+ 
+          $cart = Session::get('cart');
+ 
+          foreach ($cart as $product_item){
+ 
+            $obj = new order_detail();
+            $obj->user_id = Auth::user()->id;
+            $obj->order_id = $the_id;
+            $obj->product_id = $product_item['id'];
+            $obj->product_image = $product_item['image'];
+            $obj->product_name = $product_item['name_product'];
+            $obj->product_total = $product_item['qty'];
+            $obj->product_price = $product_item['price'];
+            $obj->save();
+          }
+ 
+          $bank = bank::all();
+ 
+ 
+          $order = DB::table('orders')->select(
+                 'orders.*'
+                 )
+                 ->where('id', $the_id)
+                 ->first();
+ 
+                 $order_detail = DB::table('order_details')->select(
+                        'order_details.*'
+                        )
+                        ->where('order_id', $the_id)
+                        ->get();
+ 
+                     //   dd($order_detail);
+ 
+          $data['bank'] = $bank;
+         $data['order'] = $order;
+         $data['order_detai1'] = $order_detail;
+ 
+ 
+         // send email
+             $data_toview = array();
+             $data_toview['data'] = $order;
+             $data_toview['bank'] = $bank;
+             $data_toview['order_detai1'] = $order_detail;
+             $data_toview['datatime'] = date("d-m-Y H:i:s");
+
+             \Mail::to($package->email_order)->send(new \App\Mail\Pay($data_toview));
+ 
+ 
+ 
+         unset($cart);
+         session()->forget('cart');
+
+  return redirect(url('payment/'.$randomSixDigitInt))->with('aadd_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
+
+}
+
 
 
     public function add_order(Request $request){

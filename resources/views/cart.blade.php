@@ -41,24 +41,32 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 			<h1>ทำการสั่งซื้อ</h1>
 			<div class="bs-wizard">
 
-				<div class="col-xs-4 bs-wizard-step active">
-					<div class="text-center bs-wizard-stepnum">รถเข็น</div>
+				<div class="col-xs-3 bs-wizard-step active">
+					<div class="text-center bs-wizard-stepnum">Cart</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
 					<a href="{{url('cart')}}" class="bs-wizard-dot"></a>
 				</div>
 
-				<div class="col-xs-4 bs-wizard-step disabled">
-					<div class="text-center bs-wizard-stepnum">รายละเอียดการสั่งซื้อ</div>
+				<div class="col-xs-3 bs-wizard-step disabled">
+					<div class="text-center bs-wizard-stepnum">Shipping</div>
+					<div class="progress">
+						<div class="progress-bar"></div>
+					</div>
+					<a href="{{url('shipping/')}}" class="bs-wizard-dot"></a>
+				</div>
+
+				<div class="col-xs-3 bs-wizard-step disabled">
+					<div class="text-center bs-wizard-stepnum">Payment</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
 					<a href="{{url('payment')}}" class="bs-wizard-dot"></a>
 				</div>
 
-				<div class="col-xs-4 bs-wizard-step disabled">
-					<div class="text-center bs-wizard-stepnum">สำเร็จ!</div>
+        <div class="col-xs-3 bs-wizard-step disabled">
+					<div class="text-center bs-wizard-stepnum">Complete</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
 					</div>
@@ -131,7 +139,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 									<div class="thumb_cart">
 										<img src="{{url('assets/image/product/'.$product_item['image'])}}">
 									</div>
-									<span class="item_cart">{{$product_item['name_product']}}</span>
+									<span class="item_cart" style="display: contents;">{{$product_item['name_product']}}</span>
 								</td>
 								<td>
 									<div class="numbers-row">
@@ -256,7 +264,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 								</tr>
 							</tbody>
 						</table>
-						<a class="btn_full" style="font-size:15px" href="{{url('payment')}}">สั่งสินค้า</a>
+						<a class="btn_full" style="font-size:15px" href="{{url('shipping/')}}">สั่งสินค้า</a>
 						<a class="btn_full_outline" style="font-size:15px" href="{{url('/')}}"><i class="icon-right"></i> กลับไปเลือกสินค้า</a>
 					</div>
 

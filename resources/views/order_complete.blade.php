@@ -1,3 +1,4 @@
+
 @extends('layouts.template')
 
 @section('title')
@@ -51,7 +52,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 					<a href="{{url('shipping/')}}" class="bs-wizard-dot"></a>
 				</div>
 
-				<div class="col-xs-3 bs-wizard-step active">
+				<div class="col-xs-3 bs-wizard-step complete">
 					<div class="text-center bs-wizard-stepnum">Payment</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
@@ -59,7 +60,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 					<a href="{{url('payment')}}" class="bs-wizard-dot"></a>
 				</div>
 
-                <div class="col-xs-3 bs-wizard-step disabled">
+                <div class="col-xs-3 bs-wizard-step complete">
 					<div class="text-center bs-wizard-stepnum">Complete</div>
 					<div class="progress">
 						<div class="progress-bar"></div>
@@ -175,158 +176,45 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
 
 
-           
-          <div class="form_title">
-			  
-						<h3><strong>1</strong>โอนเงินผ่านธนาคาร </h3>
-						<p>
-						สามารถชำระเงินได้โดยผ่านทางธนาคาร จากนั้นกรุณาแจ้งการชำระเงินผ่านทาง Website ในหน้า account ของท่าน
-						</p>
-					</div>
+                    <div class="step">
 
-          <div class="step">
-		  <h4>คำสั่งซื้อ <a>#{{$order->lastname_order}}</a></h4>
-		  <br>
-		  <p class="text-success" style="font-size:14px;">
-            <i class="im im-icon-Money-Smiley" style="font-size:32px;"></i> หากลูกค้าเลือกที่จะ ชำระหรือโอนเงินผ่านธนาคาร ลูกค้าสามารถกด <span class="text-danger"><b>"กลับสู่หน้าแรก"</b></span> เพื่อทำรายการภายหลัง หรือ กด
-            <span class="text-danger"><b>"แจ้งชำระเงิน"</b></span> ในขั้นตอนนี้ได้เลยค่ะ
-          </p>
-						
-		  <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>#</th>
-				  <th>ธนาคาร</th>
-                  <th>ชื่อบัญชี</th>
-                  <th>เลขที่บัญชี</th>
-                  
+                        <div class="row add_bottom_60 ">
 
-                </tr>
-              </thead>
-              <tbody>
-
-                @if($bank)
-                @foreach($bank as $b)
-                <tr>
-                  <td>
-                    <img src="{{url('bank/'.$b->image)}}" height="35">
-                  </td>
-                  <td class="p_top">
-                    {{$b->bank_name}}
-                  </td>
-                  <td class="p_top">
-                    {{$b->bank_owner}}
-                  </td>
-                  <td class="p_top">
-                    {{$b->bank_number}}
-                  </td>
-                </tr>
-                @endforeach
-                @endif
+                            <div class="col-md-12">
+                                <h3>แจ้งการชำระเงินสำเร็จแล้ว </h3>
+                                    <p>
+                                    คุณได้ทำการแจ้งชำระเงินเสร็จแล้ว เราจะรีบทำการตรวจสอบให้ไวที่สุด
+                                    </p>
+                                <br />
+                            </div>
 
 
-              </tbody>
-            </table>
-          </div>
 
-	
-          <br />
-          <a href="{{url('/')}}" style="padding: 6px 12px; font-size:15px;" class="btn btn-next">กลับสู่หน้าแรก</a>
-          <a href="{{url('pay_order_detail/'.$order->lastname_order)}}" style="padding: 6px 12px; font-size:15px;" class="btn btn-next">แจ้งชำระเงิน</a>
+                        </div>
 
-					</div>
+                    </div>
+        
+
+       
 
           <!--End step -->
 
-          	<div class="form_title">
-				<h3><strong>2</strong>ชำระผ่านบัตรเครดิต</h3>
-            	<p>ทุกธุรกรรมผ่านบัตรเครดิตและบัตรเดบิตได้รับการรับรองความปลอดภัย ด้วยเทคโนโลยี 2c2p Payment gateway api</p>
-			</div>
+          
 
-			<div class="hidden">
-				<?php
-					function twelvedigits($a){
-						$a = number_format($a, 2, '', '');
-						printf("%012s\n", $a);
-					}
-					$money_var = $order->total;
-					$amount = twelvedigits($money_var);
-					$s_number = '';
-
-					$s_number = sprintf('%012s',number_format($money_var, 2, '', ''));
-				?>
-				
-			</div>
-
-
-			<?php
-
-				//Merchant's account information
-				$merchant_id = "764764000000892";
-											//Get MerchantID when opening account with 2C2P
-				$secret_key = "dsbqppYP703G";	//Get SecretKey from 2C2P PGW Dashboard
-				$ram = rand(10,20);
-				//Transaction information
-				$payment_description  = $order->user_id.'-'.$order->id.'-'.$order->lastname_order;
-				$new_oreder_id = str_pad($order->id,$ram,"0",STR_PAD_LEFT);
-
-
-				$order_id  = $new_oreder_id;
-				$currency = "764";
-
-
-				//Request information
-				$version = "8.5";
-				$payment_url = " https://t.2c2p.com/RedirectV3/payment";
-				$result_url_1 = url('/api/result_payment');
-
-				//Construct signature string
-				$params = $version.$merchant_id.$payment_description.$order_id.$currency.$s_number.$result_url_1;
-				$hash_value = hash_hmac('sha256',$params, $secret_key,false);	//Compute hash value
-
-			?>
-
-          <div class="step">
-		  <img src="{{ url('img/logo-2c2p.png') }}" style="width:80px;">
-		  <form id="myform" class="w3-container w3-display-middle w3-card-4 " method="post" action="{{$payment_url}}">
-      		<input type="hidden" name="version"  value="{{$version}}"/>
-      		<input type="hidden" name="merchant_id" value="{{$merchant_id}}"/>
-      		<input type="hidden" name="currency" value="{{$currency}}"/>
-      		<input type="hidden" name="result_url_1" value="{{$result_url_1}}"/>
-      		<input type="hidden" name="hash_value" value="{{$hash_value}}"/>
-
-          <div class="form-group hidden">
-            <label>PRODUCT INFO</label>
-          <input type="hidden" name="payment_description" class="form-control" value="{{$payment_description}}"  readonly/>
-          </div>
-
-          <div class="form-group">
-            <label>ORDER NO</label>
-          <input type="text"  class="form-control" value="{{$order->lastname_order}}"  readonly/>
-          <input type="hidden" name="order_id" class="form-control" value="{{$order_id}}"  readonly/>
-          </div>
-
-          <div class="form-group hidden">
-            <label>AMOUNT</label>
-          <input type="text" name="amount" class="form-control" value="{{twelvedigits($money_var)}}" readonly/>
-          </div>
-
-          <div class="form-group">
-            <label>AMOUNT</label>
-          <input type="text" name="" class="form-control" value="{{number_format($order->total, 2)}}" readonly/>
-          </div>
-
-          <button type="submit" class="btn btn-next" disabled>จะเปิดให้ใช้บริการในเร็วๆนี้</button>
-      	</form>
-						
-						
-		</div>
-
-          <!--End step -->
+          
 
          
-		
+		  
+
+
+    
+
+
+
+
+
+
+
 
 
         </div>

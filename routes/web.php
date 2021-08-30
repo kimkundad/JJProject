@@ -52,6 +52,13 @@ Route::get('search', 'HomeController@search');
 Route::get('/cart', 'HomeController@cart');
 Route::post('/updateCart', 'HomeController@updateCart');
 
+Route::post('/post_payment_notify', 'HomeController@post_payment_notify');
+
+Route::get('/order_complete/{id}', 'HomeController@order_complete');
+
+
+Route::get('/pay_order_detail/{id}', 'HomeController@pay_order_detail');
+
 Route::get('/confirm_payment', 'HomeController@confirm_payment');
 Route::get('product/{id}', 'HomeController@product');
 Route::post('/add_session_value', 'HomeController@add_session_value');
@@ -62,10 +69,15 @@ Route::post('/post_review_shop', 'HomeController@post_review_shop');
 
 Route::group(['middleware' => ['UserRole:manager|employee|customer']], function() {
 
+	
+Route::post('add_my_address', 'HomeController@add_my_address');
+
 Route::get('wishlist', 'HomeController@wishlist');
 Route::post('del_wishlist', 'HomeController@del_wishlist');
 
-Route::get('/payment', 'HomeController@payment');
+
+Route::get('/shipping', 'HomeController@shipping');
+Route::get('/payment/{id}', 'HomeController@payment');
 Route::post('/add_order', 'HomeController@add_order');
 Route::get('confirmation/', 'HomeController@confirmation');
 
@@ -107,8 +119,6 @@ Route::group(['middleware' => ['UserRole:manager|employee']], function() {
 	Route::post('api/api_post_status_shop', 'ProshopController@api_post_status_shop');
     Route::post('api/api_post_status_product', 'ProshopController@api_post_status_product');
 
-  
-
 	Route::post('add_gallery_shop_product', 'ProshopController@add_gallery_shop_product');
 	Route::post('property_image_del_product', 'ProshopController@property_image_del_product');
 
@@ -124,6 +134,6 @@ Route::group(['middleware' => ['UserRole:manager|employee']], function() {
 	Route::get('api/del_review_shop/{id}', 'ReviewController@del_review_shop')->name('del_review_shop');
 	Route::get('api/del_review_product/{id}', 'ReviewController@del_review_product')->name('del_review_product');
 
-
+	Route::resource('admin/free_shipping', 'GiftController');
 
 });

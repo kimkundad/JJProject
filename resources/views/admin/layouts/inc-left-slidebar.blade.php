@@ -105,6 +105,13 @@ html.no-overflowscrolling .nano > .nano-pane > .nano-slider {
 										</a>
 									</li>
 
+									<li {{ (Request::is('admin/free_shipping*') ? 'class=nav-expanded' : '') }} >
+										<a href="{{url('admin/free_shipping/')}}"  >
+											<i class="fa fa-gift" aria-hidden="true"></i>
+											<span>ส่วนลดสินค้า</span>
+										</a>
+									</li>
+
 
 
 

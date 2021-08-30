@@ -136,6 +136,7 @@
 
                                 </ul>
                  </li>
+
                  @endif
                  <li class="submenu">
                                 <a href="javascript:void(0);" class="show-submenu">Choose language <i class="icon-down-open-mini"></i></a>
@@ -189,7 +190,7 @@
                                     <li>
                                         <div>Total: <span>฿{{number_format($total)}}.00</span></div>
                                         <a href="{{url('cart')}}" class="button_drop">รถเข็น</a>
-                                        <a href="{{url('payment')}}" class="button_drop outline">สั่งสินค้า</a>
+                                        <a href="{{url('shipping/')}}" class="button_drop outline">สั่งสินค้า</a>
                                     </li>
                                 </ul>
                                 @endif

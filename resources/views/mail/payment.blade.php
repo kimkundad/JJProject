@@ -67,12 +67,12 @@ repeat-y;width:100%;display:block">
 </tr>
 <tr>
 <td style="text-align:right;font-size:12px" width="150">
-<span>รวม: </span>THB {{ $data_toview['data']->total }}
+<span>ค่าจัดส่ง: </span>THB{{ $data_toview['data']->shipping_price }}
 </td>
 </tr>
 <tr>
 <td style="text-align:right;font-size:12px" width="150">
-<span>ค่าจัดส่ง: </span>THB{{ $data_toview['data']->shipping_price }}
+<span>ยอดที่ต้องชำระ รวม: </span>THB {{ $data_toview['data']->total }}
 </td>
 </tr>
 </tbody>

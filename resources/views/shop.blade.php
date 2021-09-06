@@ -398,7 +398,7 @@ figcaption {
   justify-self: start;
 }
 .container_img {
-  column-count: 4;
+  column-count: 3;
   column-gap: 10px;
 }
 

@@ -385,10 +385,6 @@ figure > img {
   grid-column: 1;
 }
 
-figure a {
-  color: black;
-  text-decoration: none;
-}
 
 figcaption {
   grid-row: 2;
@@ -417,7 +413,9 @@ figcaption {
 
                                  
                                    <figure>
+                                     <a class="example-image-link" href="{{url('assets/image/cusimage/'.$gallery22->image)}}">
                                      <img class="img-responsive styled" style="margin-top: 10px;" src="{{url('assets/image/cusimage/'.$gallery22->image)}}" alt="">
+                                     </a>
                                    </figure>
                                
 

@@ -406,9 +406,10 @@ figcaption {
 
               <div class="row magnific-gallery add_bottom_60 ">
 
-                <div class="container_img">
+                <div class="col-md-12">
                     <h3>{{trans('message.new_pro')}} </h3>
                 </div>
+                <div class="container_img">
                         @if(isset($gallery2))
                           @foreach($gallery2 as $gallery22)
 
@@ -421,6 +422,7 @@ figcaption {
 
                                  @endforeach
                                @endif
+                </div>
 
 
 

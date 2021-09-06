@@ -181,7 +181,57 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
               <div class="see-all-overlay"><span class="see-all-overlay-text">ดูทั้งหมด {{$home_image_count}} รูป</span></div></a>
             </div>
 
-            @else
+            @elseif($home_image_count == 4)
+
+
+            <div class="col-md-6 col-sm-6" style="padding-right: 3px;">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" alt="" style="height: 279px;"></a>
+            </div>
+
+            <div class="col-md-6 col-sm-6" style="padding-left: 3px;">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" alt="" style="height: 279px;"></a>
+            </div>
+
+            <div class="col-md-6 col-sm-6" style="padding-right: 0px; padding-top:5px">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[2]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[2]->image)}}" alt=""></a>
+            </div>
+
+            <div class="col-md-6 col-sm-6" style="padding-left: 6px; padding-top:5px; ">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[3]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[3]->image)}}" alt=""></a>
+            </div>
+
+            @elseif($home_image_count == 3)
+
+
+            <div class="col-md-6 col-sm-6" style="padding-right: 3px;">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" alt="" style="height: 279px;"></a>
+            </div>
+
+            <div class="col-md-6 col-sm-6" style="padding-left: 3px;">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" alt="" style="height: 279px;"></a>
+            </div>
+
+            <div class="col-md-12 col-sm-12" style=" padding-top:5px">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[2]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[2]->image)}}" alt=""></a>
+            </div>
+
+
+            @elseif($home_image_count == 2)
+
 
             <div class="col-md-6 col-sm-6" style="padding-right: 3px;">
 
@@ -190,6 +240,18 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
             </div>
 
             <div class="col-md-6 col-sm-6" style="padding-left: 3px;">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" alt=""></a>
+            </div>
+
+           
+
+            @else
+
+            
+            
+            <div class="col-md-6 col-sm-6">
 
             <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" >
               <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" alt=""></a>
@@ -307,6 +369,37 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
                           <hr>
 
+
+                          <style>
+
+figure {
+  margin: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  margin-bottom: 10px;
+  break-inside: avoid;
+}
+
+figure > img {
+  grid-row: 1 / -1;
+  grid-column: 1;
+}
+
+figure a {
+  color: black;
+  text-decoration: none;
+}
+
+figcaption {
+  grid-row: 2;
+  grid-column: 1;
+  background-color: rgba(255,255,255,.5);
+  padding: .2em .5em;
+  justify-self: start;
+}
+
+                          </style>
+
               <div class="row magnific-gallery add_bottom_60 ">
 
                 <div class="col-md-12">
@@ -316,11 +409,11 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                           @foreach($gallery2 as $gallery22)
 
 
-                                 <div class="col-md-4 " style=" padding-right: 5px; padding-left: 5px;">
-                                   <a class="example-image-link" href="{{url('assets/image/cusimage/'.$gallery22->image)}}" data-lightbox="example-set">
+                                 
+                                   <figure>
                                      <img class="img-responsive styled" style="margin-top: 10px;" src="{{url('assets/image/cusimage/'.$gallery22->image)}}" alt="">
-                                   </a>
-                                 </div>
+                                   </figure>
+                               
 
                                  @endforeach
                                @endif

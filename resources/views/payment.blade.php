@@ -263,9 +263,9 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 			<?php
 
 				//Merchant's account information
-				$merchant_id = "764764000000892";
+				$merchant_id = "764764000008169";
 											//Get MerchantID when opening account with 2C2P
-				$secret_key = "dsbqppYP703G";	//Get SecretKey from 2C2P PGW Dashboard
+				$secret_key = "65C41536C3F89E3B6D292E8A3EB5279412333ACD45124BD43FBC0D014C11D9C9";	//Get SecretKey from 2C2P PGW Dashboard
 				$ram = rand(10,20);
 				//Transaction information
 				$payment_description  = $order->user_id.'-'.$order->id.'-'.$order->lastname_order;
@@ -278,7 +278,8 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
 				//Request information
 				$version = "8.5";
-				$payment_url = " https://t.2c2p.com/RedirectV3/payment";
+				//$payment_url = " https://t.2c2p.com/RedirectV3/payment";
+				$payment_url = "https://demo2.2c2p.com/2C2PFrontEnd/RedirectV3/payment";
 				$result_url_1 = url('/api/result_payment');
 
 				//Construct signature string
@@ -317,7 +318,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
           <input type="text" name="" class="form-control" value="{{number_format($order->total, 2)}}" readonly/>
           </div>
 
-          <button type="submit" class="btn btn-next" disabled>จะเปิดให้ใช้บริการในเร็วๆนี้</button>
+          <button type="submit" class="btn btn-next" >จะเปิดให้ใช้บริการในเร็วๆนี้</button>
       	</form>
 						
 						

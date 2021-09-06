@@ -20,6 +20,7 @@ class ProshopController extends Controller
      */
     public function index()
     {
+
         //
         $cat = DB::table('products')->select(
               'products.*',
@@ -28,7 +29,7 @@ class ProshopController extends Controller
               'categories.*'
               )
               ->leftjoin('categories', 'categories.id',  'products.cat_id')
-              ->get();
+              ->paginate(15);
 
         $data['s'] = 1;
         $data['objs'] = $cat;

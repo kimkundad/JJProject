@@ -285,6 +285,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
             <div class="row magnific-gallery visible-sm visible-xs">
             @if($home_image_all != null)
+
   @if($home_image_count > 4)
 
 <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
@@ -318,9 +319,58 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
   <div class="see-all-overlay" ><span class="see-all-overlay-text">ดูทั้งหมด {{$home_image_count}} รูป</span></div></a>
 </div>
 
-@else
 
-<div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
+@elseif($home_image_count == 4)
+
+
+<div class="col-md-6 col-sm-6" style="padding-right: 3px;">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" alt="" ></a>
+            </div>
+
+            <div class="col-md-6 col-sm-6" style="padding-left: 3px;">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" alt="" ></a>
+            </div>
+
+            <div class="col-md-6 col-sm-6" style="padding-right: 0px; padding-top:5px">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[2]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[2]->image)}}" alt=""></a>
+            </div>
+
+            <div class="col-md-6 col-sm-6" style="padding-left: 6px; padding-top:5px; ">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[3]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[3]->image)}}" alt=""></a>
+            </div>
+
+            @elseif($home_image_count == 3)
+
+
+            <div class="col-md-6 col-sm-6" style="padding-right: 3px;">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" alt="" ></a>
+            </div>
+
+            <div class="col-md-6 col-sm-6" style="padding-left: 3px;">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" alt="" ></a>
+            </div>
+
+            <div class="col-md-12 col-sm-12" style=" padding-top:5px">
+
+            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[2]->image)}}" >
+              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[2]->image)}}" alt=""></a>
+            </div>
+
+            @elseif($home_image_count == 2)
+
+            <div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
 
 <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" >
   <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" alt=""></a>
@@ -331,6 +381,17 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" >
   <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" alt=""></a>
 </div>
+
+@else
+
+<div class="col-md-6 col-sm-6" style="margin-bottom: 8px;">
+
+<a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" >
+  <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" alt=""></a>
+</div>
+
+
+
 
 @endif
 @endif

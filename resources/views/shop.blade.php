@@ -397,12 +397,16 @@ figcaption {
   padding: .2em .5em;
   justify-self: start;
 }
+.container_img {
+  column-count: 4;
+  column-gap: 10px;
+}
 
                           </style>
 
               <div class="row magnific-gallery add_bottom_60 ">
 
-                <div class="col-md-12">
+                <div class="container_img">
                     <h3>{{trans('message.new_pro')}} </h3>
                 </div>
                         @if(isset($gallery2))

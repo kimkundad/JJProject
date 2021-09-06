@@ -282,7 +282,7 @@ text-transform: uppercase;
 </div>
 
 
-<div class="row magnific-gallery visible-sm visible-xs">
+<div class="row magnific-gallery visible-sm visible-xs" id="{{ $home_image_count }}">
 
 @if($home_image_count > 4)
 

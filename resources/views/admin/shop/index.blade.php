@@ -82,6 +82,7 @@
                     </tr>
                   </thead>
                   <tbody>
+                    
              @if($objs)
                 @foreach($objs as $u)
                     <tr id="{{$u->id_q}}">

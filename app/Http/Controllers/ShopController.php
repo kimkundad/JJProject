@@ -366,10 +366,7 @@ class ShopController extends Controller
 
         }else{
 
-          $objs = DB::table('product')
-          ->select(
-             'product.*'
-             )
+          $objs = DB::table('shops')
           ->where('id', $id)
           ->first();
 
@@ -536,8 +533,6 @@ class ShopController extends Controller
          /*  $path = 'assets/cusimage/';
            $filename = time()."-".$gallary[$i]->getClientOriginalName();
            $gallary[$i]->move($path, $filename); */
-
-
 
 
          }

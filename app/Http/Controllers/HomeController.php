@@ -454,18 +454,15 @@ $data['category1'] = $cat;
 
         $sum_star = DB::table('review_shops')
             ->where('product_id', $id)
-            ->where('status', 1)
             ->sum('star');
 
      $count_star = DB::table('review_shops')
             ->where('product_id', $id)
-            ->where('status', 1)
             ->count();
             $data['count_star'] = $count_star;
 
      $review = DB::table('review_shops')
             ->where('product_id', $id)
-            ->where('status', 1)
             ->paginate(15);
 
             $data['review'] = $review;
@@ -1218,18 +1215,15 @@ $data['category1'] = $cat;
 
      $sum_star = DB::table('review_products')
             ->where('product_id', $id)
-            ->where('status', 1)
             ->sum('star');
 
      $count_star = DB::table('review_products')
             ->where('product_id', $id)
-            ->where('status', 1)
             ->count();
             $data['count_star'] = $count_star;
 
      $review = DB::table('review_products')
             ->where('product_id', $id)
-            ->where('status', 1)
             ->paginate(15);
 
             $data['review'] = $review;

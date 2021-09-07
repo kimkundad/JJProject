@@ -245,17 +245,21 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
               <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" alt=""></a>
             </div>
 
+            @elseif($home_image_count == 1)
+
+            <div class="col-md-6 col-sm-6">
+
+<a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" >
+  <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" alt=""></a>
+</div>
+
            
 
             @else
 
             
             
-            <div class="col-md-6 col-sm-6">
-
-            <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" >
-              <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" alt=""></a>
-            </div>
+            
 
             @endif
             @endif
@@ -381,13 +385,17 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
   <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[1]->image)}}" alt=""></a>
 </div>
 
-@else
+@elseif($home_image_count == 1)
 
 <div class="col-md-12 " style="margin-bottom: 8px;">
 
 <a class="example-image-link" href="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" >
   <img class="img-responsive example-image" src="{{url('assets/image/cusimage/'.$home_image[0]->image)}}" alt=""></a>
 </div>
+
+@else
+
+
 
 
 

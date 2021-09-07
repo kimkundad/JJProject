@@ -19,6 +19,19 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
   padding-top: 10px;
   text-align: center;
 }
+.img_list img {
+    width: auto;
+    height: 220px;
+    position: absolute;
+    left: 9%;
+}
+@media (min-width: 768px) and (max-width: 1200px){
+  .img_list img {
+    left: 0%;
+}
+}
+
+
 </style>
 <section id="search_container" style="background:#4d536d url(assets/img/bg_login.png) no-repeat center top;">
 <div id="search">

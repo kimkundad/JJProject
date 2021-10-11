@@ -37,3 +37,44 @@
 		 <script src="{{asset('/assets/javascripts/tables/examples.datatables.default.js')}}"></script>
 		 <script src="{{asset('/assets/javascripts/pages/examples.mediagallery.js')}}"></script>
 		 <script src="{{asset('/assets/javascripts/ui-elements/examples.loading.overlay.js')}}"></script>
+
+		 @if ($message = Session::get('add_success'))
+<script type="text/javascript">
+
+  var stack_topleft = {"dir1": "down", "dir2": "right", "push": "top"};
+      var notice = new PNotify({
+            title: 'ทำรายการสำเร็จ',
+            text: 'ยินดีด้วย ได้ทำการเพิ่มข้อมูล สำเร็จเรียบร้อยแล้วค่ะ',
+            type: 'success',
+            addclass: 'stack-topright'
+          });
+</script>
+@endif
+
+
+@if ($message = Session::get('delete'))
+<script type="text/javascript">
+
+
+    var stack_topleft = {"dir1": "down", "dir2": "right", "push": "top"};
+        var notice = new PNotify({
+              title: 'ทำรายการสำเร็จ',
+              text: 'ยินดีด้วย ได้ทำการลบข้อมูล สำเร็จเรียบร้อยแล้วค่ะ',
+              type: 'success',
+              addclass: 'stack-topright'
+            });
+</script>
+@endif
+
+@if ($message = Session::get('edit_success'))
+<script type="text/javascript">
+
+  var stack_topleft = {"dir1": "down", "dir2": "right", "push": "top"};
+      var notice = new PNotify({
+            title: 'ทำรายการสำเร็จ',
+            text: 'ยินดีด้วย ได้ทำการแก้ไขข้อมูล สำเร็จเรียบร้อยแล้วค่ะ',
+            type: 'success',
+            addclass: 'stack-topright'
+          });
+</script>
+@endif

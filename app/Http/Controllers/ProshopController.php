@@ -11,6 +11,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\ImageManagerStatic as Image;
 
+
 class ProshopController extends Controller
 {
     /**

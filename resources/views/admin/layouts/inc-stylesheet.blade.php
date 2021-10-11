@@ -50,6 +50,9 @@
         <!-- Dropzone -->
       
         <style type="text/css">
+        .mt-4{
+            margin-top: 1.5rem !important;
+        }
         .select2-container .select2-choice {
                 display: block;
                 height: 35px;
@@ -58,6 +61,16 @@
                 margin-right: 10px;
                 width: 85px;
             }
+            .card-body {
+    background: #fdfdfd;
+    -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 5%);
+    border-radius: 5px;
+    padding:15px;
+}
+.invoice {
+    padding: 15px;
+}
 
         </style>
 

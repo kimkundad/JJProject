@@ -14,7 +14,7 @@
         <section role="main" class="content-body">
 
           <header class="page-header">
-            <h2>ส่วนลดทั้งหมด ( {{ count($objs) }} )</h2>
+            <h2>ยอดสั่งซื้อทั้งหมด ( {{ count($objs) }} )</h2>
 
             <div class="right-wrapper pull-right">
               <ol class="breadcrumbs">
@@ -24,7 +24,7 @@
                   </a>
                 </li>
 
-                <li><span>ส่วนลดทั้งหมด</span></li>
+                <li><span>ยอดสั่งซื้อทั้งหมด</span></li>
               </ol>
 
               <a class="sidebar-right-toggle" data-open="sidebar-right" ><i class="fa fa-chevron-left"></i></a>
@@ -50,9 +50,17 @@
 
                 <div class="col-md-12 " style="padding-left: 1px;">
 
-                <a class="btn btn-primary " href="{{url('admin/free_shipping/create')}}" >
-                      <i class="fa fa-plus"></i> เพิ่มส่วนลด</a>
-            
+                      <form action="{{url('admin/search_order')}}" method="POST" class="search nav-form col-md-4">
+                        {{ csrf_field() }}
+            						<div class="input-group input-search">
+            							<input type="text" class="form-control" name="search" id="q" placeholder="ค้นหา...">
+            							<span class="input-group-btn">
+            								<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+            							</span>
+            						</div>
+            					</form>
+
+
                 </div>
 
                 <br><br>
@@ -63,11 +71,9 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>ชื่อส่วนลด</th>
-                      <th>Code ส่วนลด</th>
-                      <th>ราคาส่วนลด</th>
+                      <th>ผู้สั่งซื้อ</th>
                       <th>วันที่</th>
-                      <th>จำนวนที่สร้าง</th>
+                      <th>ยอดซื้อรวม</th>
                       <th>สถานะ</th>
                       <th>จัดการ</th>
                     </tr>
@@ -76,37 +82,26 @@
                     
              @if($objs)
                 @foreach($objs as $u)
-
-                    <tr access_id="{{$u->id}}">
-                      <td><img src="{{url('assets/banner/'.$u->image)}}" alt="{{$u->name}}" style="height:32px;" class="img-circle"></td>
-                      <td>{{$u->name}}</td>
-                      <td>{{$u->code}}</td>
-                      <td>{{$u->detail}}</td>
-                      <td>{{$u->start}} - {{$u->end}}</td>
-                      <td>{{$u->total}}</td>
-                      <td>
-                        <div class="switch switch-sm switch-success">
-                          <input type="checkbox" name="switch" data-plugin-ios-switch
-                          @if($u->status == 1)
-                          checked="checked"
-                          @endif
-                          />
-                        </div>
-                      </td>
-                      <td>
+                      <tr>
+                          <td> #{{ $u->lastname_order }} </td>
+                          <td>{{ $u->name_order }}</td>
+                          <td>{{ $u->created_at }}</td>
+                          <td>{{ $u->total }}</td>
+                          <td></td>
+                          <td>
 
                         <div class="btn-group flex-wrap">
-  							<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
-  								<div class="dropdown-menu" role="menu">
-  								<a class="dropdown-item text-1" href="{{url('admin/free_shipping/'.$u->id.'/edit')}}">แก้ไข</a>
-  								<a class="dropdown-item text-1 text-danger" href="{{ url('api/del_gift/'.$u->id) }}" onclick="return confirm('Are you sure?')">ลบ</a> 
-  							</div>
-  						</div>
+  												<button type="button" class="mb-1 mt-1 mr-1 btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">จัดการ <span class="caret"></span></button>
+  												<div class="dropdown-menu" role="menu">
+
+  												<a class="dropdown-item text-1" href="{{url('admin/order/'.$u->id.'/edit')}}">แก้ไข</a>
+  												<a class="dropdown-item text-1 text-danger" onclick="return confirm('Are you sure?')" href="{{ url('api/del_order/'.$u->id) }}">ลบ</a>
+
+  												</div>
+  											</div>
 
                       </td>
-                    </tr>
-                      
-                
+                      </tr>
                  @endforeach
               @endif
 
@@ -132,12 +127,11 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $("input:checkbox").change(function() {
-
-    var user_id = $(this).closest('tr').attr('access_id');
+    var user_id = $(this).closest('tr').attr('id');
 
     $.ajax({
             type:'POST',
-            url:'{{url('api/post_status_gift')}}',
+            url:'{{url('api/post_status_order')}}',
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
             data: { "user_id" : user_id },
             success: function(data){

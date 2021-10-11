@@ -135,5 +135,13 @@ Route::group(['middleware' => ['UserRole:manager|employee']], function() {
 	Route::get('api/del_review_product/{id}', 'ReviewController@del_review_product')->name('del_review_product');
 
 	Route::resource('admin/free_shipping', 'GiftController');
+	Route::post('api/post_status_gift', 'GiftController@post_status_gift');
+	Route::get('api/del_gift/{id}', 'GiftController@del_gift')->name('del_gift');
+
+	Route::resource('admin/order', 'OrderController');
+	Route::get('api/del_order/{id}', 'OrderController@del_order')->name('del_order');
+	Route::post('api/api_post_status_order', 'OrderController@api_post_status_order');
+	Route::post('admin/search_order', 'OrderController@search_order');
+	
 
 });

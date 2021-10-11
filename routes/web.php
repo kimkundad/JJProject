@@ -30,6 +30,7 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/presentation', 'HomeController@presentation');
 Route::get('/contact_us', 'HomeController@contact_us');
+Route::get('/all_vouchers', 'HomeController@all_vouchers');
 
 Route::post('/api/add_contact', 'HomeController@add_contact')->name('add_contact');
 Route::post('/api/add_my_product_home', 'HomeController@add_my_product_home')->name('add_my_product_home');

@@ -111,7 +111,9 @@
 
                   <li>
                      <a style="font-size: 15px;" href="{{url('/contact_us')}}">{{ trans('message.contact_us') }}  </a>
-
+                 </li>
+                 <li>
+                     <a style="font-size: 15px;" href="{{url('/all_vouchers')}}">แจกโค้ดส่วนลด  </a>
                  </li>
                  @if (Auth::guest())
                  @else

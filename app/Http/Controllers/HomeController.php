@@ -210,6 +210,11 @@ $data['category1'] = $cat;
         return view('presentation', $data);
       }
 
+      public function all_vouchers(){
+
+        return view('all_vouchers');
+      }
+
 
     public function contact_us()
     {

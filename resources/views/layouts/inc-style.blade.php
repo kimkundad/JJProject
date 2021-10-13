@@ -166,12 +166,12 @@ font-size: 24px;
 .f_s_title_kim{
     font-size:18px;
 }
-@media only screen and (max-width:320){
+@media (max-width: max-width:320){
     .set_img_kim{
     height:100px;
 }
 }
-@media only screen and (max-width:414){
+@media (max-width: max-width:414){
     .set_img_kim{
     height:140px;
 }

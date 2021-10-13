@@ -74,11 +74,10 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
   <div class="row">
 
-
     @if($shop)
       @foreach($shop as $shops)
 
-    <div class="col-md-3 col-xs-6 set_img_kim set_new_mar wow zoomIn" data-wow-delay="0.1s" style=" visibility: visible; animation-delay: 0.1s; animation-name: zoomIn;  padding-right: 6px; padding-left: 6px;">
+    <div class="col-md-3 col-xs-6  set_new_mar wow zoomIn" data-wow-delay="0.1s" style=" visibility: visible; animation-delay: 0.1s; animation-name: zoomIn;  padding-right: 6px; padding-left: 6px;">
 
       @if($set_point<=3)
       <div class="ribbon_3 popular"><span>Recommend</span></div>

@@ -257,10 +257,9 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                             </div>
 
                             <div class="descript" style="height: 20px;">
-                              <span style="color: #e03753; font-size: 18px; font-weight: 600;">฿ {{number_format($u->price)}} </span>
+                              <span class="f_s_title_kim" style="color: #e03753; font-weight: 600;">฿ {{number_format($u->price)}} </span>
                               <div class="descript-t">
                               <div class="postMetaInline-authorLockup">
-
                              
 
                                 <div class="rating">

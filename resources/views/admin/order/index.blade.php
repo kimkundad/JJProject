@@ -86,7 +86,7 @@
                           <td> #{{ $u->lastname_order }} </td>
                           <td>{{ $u->name_order }}</td>
                           <td>{{ $u->created_at }}</td>
-                          <td>{{ $u->total }}</td>
+                          <td>{{ $u->total-$u->discount }}</td>
                           <td></td>
                           <td>
 

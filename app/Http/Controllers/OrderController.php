@@ -19,7 +19,7 @@ class OrderController extends Controller
     public function index()
     {
         //
-        $cat = DB::table('orders')->paginate(15);
+        $cat = DB::table('orders')->orderby('id','desc')->paginate(15);
 
       $data['s'] = 1;
       $data['objs'] = $cat;

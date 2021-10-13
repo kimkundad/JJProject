@@ -156,6 +156,10 @@ ul#cart_items li .image img {
 .margin-top-20{
   margin-top:20px;
 }
+.main_title p {
+
+font-size: 24px;
+}
 @media only screen and (max-width:768px){
   .goog-te-gadget-simple .goog-te-menu-value{
     margin-top: -20px;
@@ -164,7 +168,37 @@ ul#cart_items li .image img {
   .goog-te-gadget-simple{
     float: right;
   }
+  header {
+    background-color: #fff;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99999;
+    padding: 10px 0;
 }
+.cmn-toggle-switch span {
+    background: #555;
+}
+.cmn-toggle-switch span::before, .cmn-toggle-switch span::after {
+    position: absolute;
+    display: block;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+    content: "";
+}
+.cmn-toggle-switch span::before, .cmn-toggle-switch span::after {
+    background-color: #555;
+}
+.main_title p {
+
+    font-size: 18px;
+}
+
+}
+
 .bobo{
 
 }

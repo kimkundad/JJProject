@@ -94,6 +94,7 @@
 									</div>
 								</div>
 							
+
 								<table class="table table-responsive-md invoice-items">
 									<thead>
 										<tr class="text-dark">
@@ -134,15 +135,20 @@
 														<td colspan="2">Shipping</td>
 														<td class="text-left">฿{{ $objs->shipping_price }}</td>
 													</tr>
+													<tr>
+														<td colspan="2">Discount</td>
+														<td class="text-left">฿{{ $objs->discount }}</td>
+													</tr>
 													<tr class="h4">
 														<td colspan="2">Grand Total</td>
-														<td class="text-left">฿{{ $objs->total }}</td>
+														<td class="text-left">฿{{ $objs->total-$objs->discount }}</td>
 													</tr>
 												</tbody>
 											</table>
 										</div>
 									</div>
 								</div>
+
 							</div>
 
 							

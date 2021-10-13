@@ -242,6 +242,8 @@ $('.add_vouchers').click(function(e){
                   failure: function(errMsg) {
                     alert(errMsg.Msg);
                   }
+
+                  
                 });
            
 

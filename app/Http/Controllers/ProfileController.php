@@ -112,6 +112,35 @@ class ProfileController extends Controller
 
     }
 
+    public function payment_notify_item2($id){
+
+      $get_order = DB::table('orders')
+        ->where('user_id', Auth::user()->id)
+        ->where('id', $id)
+        ->first();
+
+        $data['get_order'] = $get_order;
+
+        $order_de = DB::table('order_details')->select(
+          'order_details.*',
+          'order_details.id as id_de',
+          'order_details.created_at as created_ats',
+          'products.*'
+          )
+          ->leftjoin('products', 'products.id',  'order_details.product_id')
+          ->where('order_details.order_id', $get_order->id)
+          ->get();
+
+          $data['order_de'] = $order_de;
+
+        //  dd($order_de);
+
+
+
+      return view('profile.payment_notify_item2', $data);
+
+    }
+
     public function user_purchase(){
 
         $get_order = DB::table('orders')

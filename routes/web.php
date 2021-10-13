@@ -97,6 +97,7 @@ Route::get('/payment_notify', 'ProfileController@payment_notify');
 Route::get('/user_purchase', 'ProfileController@user_purchase');
 
 Route::get('user_coupon/', 'ProfileController@user_coupon');
+Route::get('payment_notify_item2/{id}', 'ProfileController@payment_notify_item2');
 
 });
 

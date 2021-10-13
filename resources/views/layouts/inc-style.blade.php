@@ -166,16 +166,7 @@ font-size: 24px;
 .f_s_title_kim{
     font-size:18px;
 }
-@media (max-width:320){
-    .set_img_kim{
-    height:100px;
-}
-}
-@media (max-width::414){
-    .set_img_kim{
-    height:140px;
-}
-}
+
 
 @media (max-width:768px){
     .f_s_title_kim{
@@ -221,7 +212,16 @@ font-size: 24px;
 }
 
 }
-
+@media (max-width:320){
+    .set_img_kim{
+    height:100px;
+}
+}
+@media (max-width::414){
+    .set_img_kim{
+    height:140px;
+}
+}
 
 
 .bobo{

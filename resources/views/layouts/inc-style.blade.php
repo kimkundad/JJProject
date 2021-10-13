@@ -160,13 +160,7 @@ ul#cart_items li .image img {
 
 font-size: 24px;
 }
-.set_new_mar{
-    height:200px;
-}
 @media only screen and (max-width:768px){
-    .set_new_mar{
-    height:130px;
-}
   .goog-te-gadget-simple .goog-te-menu-value{
     margin-top: -20px;
     margin-left: 30px;

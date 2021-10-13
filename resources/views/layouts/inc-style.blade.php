@@ -163,7 +163,13 @@ font-size: 24px;
 .set_img_kim{
     height:200px;
 }
+.f_s_title_kim{
+    font-size:18px;
+}
 @media only screen and (max-width:768px){
+    .f_s_title_kim{
+    font-size:12px;
+}
     .set_img_kim{
     height:130px;
 }

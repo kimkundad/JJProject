@@ -32,6 +32,10 @@ Route::get('/presentation', 'HomeController@presentation');
 Route::get('/contact_us', 'HomeController@contact_us');
 Route::get('/all_vouchers', 'HomeController@all_vouchers');
 
+Route::post('/add_vouchers', 'HomeController@add_vouchers');
+Route::post('/add_vouchers_cart', 'HomeController@add_vouchers_cart');
+
+
 Route::post('/api/add_contact', 'HomeController@add_contact')->name('add_contact');
 Route::post('/api/add_my_product_home', 'HomeController@add_my_product_home')->name('add_my_product_home');
 Route::post('/add_subscribe', 'HomeController@add_subscribe');
@@ -77,6 +81,7 @@ Route::get('wishlist', 'HomeController@wishlist');
 Route::post('del_wishlist', 'HomeController@del_wishlist');
 
 
+
 Route::get('/shipping', 'HomeController@shipping');
 Route::get('/payment/{id}', 'HomeController@payment');
 Route::post('/add_order', 'HomeController@add_order');
@@ -91,6 +96,7 @@ Route::post('post_edit_profile', 'ProfileController@post_edit_profile')->name('p
 Route::get('/payment_notify', 'ProfileController@payment_notify');
 Route::get('/user_purchase', 'ProfileController@user_purchase');
 
+Route::get('user_coupon/', 'ProfileController@user_coupon');
 
 });
 

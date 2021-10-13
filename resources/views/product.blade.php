@@ -451,13 +451,13 @@ text-transform: uppercase;
     <div class="col-md-4 col-xs-6 set_new_mar">
         <div class="thumbnail a_sd_move">
               <div style=" overflow: hidden; position: relative; min-height: 153px; max-height: 173px;">
-                  <a href="{{url('product/'.$u->id)}}">
+                  <a href="{{url('product/'.$u->idp)}}">
                       <img src="{{url('assets/image/product/'.$u->image_pro)}}">
                   </a>
                 </div>
                 <div class="caption" style="padding: 3px;">
                             <div class="descript bold" style="border-bottom: 1px dashed #dff0d8; height: 38px;overflow: hidden; ">
-                                <a href="{{url('product/'.$u->id)}}">{{$u->name_pro}}</a>
+                                <a href="{{url('product/'.$u->idp)}}">{{$u->name_pro}}</a>
                             </div>
 
                             <div class="descript" style="height: 20px;">

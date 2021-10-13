@@ -11,17 +11,15 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 @section('content')
 
 
-<section class="parallax-window" data-parallax="scroll" data-image-src="{{url('assets/img/home_bg_3.jpg')}}" data-natural-width="1400" data-natural-height="370">
-            <div class="parallax-content-1">
-              
-            </div>
+<section class="parallax-window" style="min-height: 270px;" data-parallax="scroll" data-image-src="{{url('assets/img/home_bg_3.jpg')}}" data-natural-width="1400" data-natural-height="370">
+            
         </section>
 
         <div id="position">
             	<div class="container">
                         	<ul>
                             <li><a href="{{url('/')}}">{{ trans('message.index') }}</a></li>
-                            <li><a href="#">เก็บโค้ดส่วนลดจาก TeeNeeJJ</a></li>
+                            <li><a href="#">บัญชีของฉัน</a></li>
 
                             </ul>
                 </div>
@@ -30,16 +28,33 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
             <div class="container margin_60">
 
-    <div class="main_title">
-        <h2>เก็บโค้ดส่วนลดจาก <span> TeeNeeJJ </span></h2>
-        <br>
-        <p> เงื่อนไข ของโค้ดส่วนลดที่ลูกค้าได้รับนั้น เป็นไปตามเงื่อนไขที่ทางบริษัทกำหนด อาจมีการเปลี่ยนแปลงได้ตลอดเวลา</p>
-    </div>
-    <br>
-    <img src="{{ url('img/code_teeneejj.jpg') }}" class="img-responsive">
+            <div class=" margin_30 text-center">
+                <h2 class="major"><span>คูปองส่วนลดของฉัน </span></h2>
+            </div>
 
-    <br>
-<style>
+
+            <div class="row">
+                <aside class="col-md-3">
+                    <div class="box_style_cat">
+                    <ul id="cat_nav">
+                                        <li><a href="{{url('my_account')}}"><i class="icon_set_1_icon-29"></i> บัญชีของฉัน</a>
+                                        </li>
+                                        <li><a href="{{ url('user_purchase') }}"><i class="icon_set_1_icon-50"></i> การซื้อของฉัน</a>
+                                        </li>
+                                        <li><a href="{{ url('user_coupon') }}"><i class="im im-icon-Gift-Box" style="margin-right:10px; "></i> คูปองส่วนลด </a>
+                                        </li>
+                                        <li><a href="{{ url('payment_notify') }}"><i class="im im-icon-Coin" style="margin-right:10px; "></i> แจ้งชำระเงินโอน </a>
+                                        </li>
+                                        <li><a href="{{ url('delete_my_account') }}"><i class="icon_set_1_icon-94" ></i> ลบบัญชีของคุณ</a></li>
+                                        <li><a href="{{ url('logout') }}"><i class="icon-lock" ></i> ออกจากระบบ </a>
+                                        </li>
+
+                                    </ul>
+                    </div>
+                </aside>
+
+
+                <style>
     #filters_col2 {
     padding: 15px 10px 15px 15px;
     border: 1px dashed #ddd;
@@ -95,7 +110,13 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 }
 </style>
 
-        <div class="row" style="padding-right: 10px;
+
+                <div class="col-md-9">
+                    <h3> คูปองส่วนลดทั้งหมด   </h3>
+                    <br />
+
+
+                    <div class="row" style="padding-right: 10px;
     padding-left: 10px;">
 
             @if($objs)
@@ -113,7 +134,13 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                             <div class="tour_list_desc2">
                                 <h2>ส่วนลด {{$u->detail}}%</h2>
                                 <p class="text-muted"><strong class="hidden-sm hidden-xs text-danger">CODE : </strong> {{$u->code}}</p>
-                                <a data-id="{{$u->id}}" class="btn_1 add_vouchers">เก็บโค้ด</a>
+                                
+                                @if($u->g_status == 0)
+                                <p class="text-success">พร้อมใช้งาน </p>
+                                @else
+                                <p class="text-danger">หมดอายุหรือใช้งานไปแล้ว </p>
+                                @endif
+                                
                                 <span>ใช้ได้ถึง {{ formatDateThat($u->end) }}</span>
                             </div>
                         </div>
@@ -144,6 +171,11 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
             </div> -->
 
         </div>
+                  
+                </div>
+            </div>
+
+  
     
 
 
@@ -151,7 +183,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
 
 
-        <hr>
+        
 
 </div>
 
@@ -161,93 +193,40 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
 @section('scripts')
 
+
+@if ($message = Session::get('edit_success'))
 <script type="text/javascript">
 
-$('.add_vouchers').click(function(e){
-    e.preventDefault();
-    
-    var get_id = $(this).data("id")
-    console.log('------> ',get_id)
+
+    $(function(){
+      // bind change event to select
+
+      $.notify({
+          // options
+          icon: 'icon_set_1_icon-76',
+          title: "<h4>อัพเดทข้อมุลสำเร็จ</h4> ",
+          message: "",
+        },{
+          // settings
+          type: 'info',
+          delay: 5000,
+          timer: 3000,
+          z_index: 9999,
+          showProgressbar: false,
+          placement: {
+            from: "bottom",
+            align: "right"
+          },
+          animate: {
+            enter: 'animated bounceInUp',
+            exit: 'animated bounceOutDown'
+          },
+        });
 
 
-                $.ajax({
-                  type: "POST",
-                  async: true,
-                  url: "{{url('add_vouchers')}}",
-                  headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-                  data: "id="+get_id,
-                  dataType: "json",
-               success: function(json){
-                 if(json.data.status == 200) {
-
-
-                   $.notify({
-                    // options
-                    icon: 'icon_set_1_icon-76',
-                    title: "<h4>เก็บโค้ดส่วนลด สำเร็จ</h4> ",
-                    message: "ท่านสามารถใช้ โค้ดส่วนลดนี้ร่วมกับรายการสินค้าได้ "
-                   },{
-                    // settings
-                    type: 'info',
-                    delay: 5000,
-                    timer: 33000,
-                    z_index: 9999,
-                    showProgressbar: false,
-                    placement: {
-                      from: "bottom",
-                      align: "right"
-                    },
-                    animate: {
-                      enter: 'animated bounceInUp',
-                      exit: 'animated bounceOutDown'
-                    },
-                   });
-
-                   document.getElementById(userId).remove();
-                   
-                   get_count_wi -= 1
-                   div.innerHTML = get_count_wi;
-
-
-                  } else {
-
-
-                    $.notify({
-                      // options
-                      icon: 'icon_set_1_icon-77',
-                      title: "<h4>เก็บโค้ดส่วนลด ไม่สำเร็จ</h4> ",
-                      message: " "+json.data.msg
-                    },{
-                      // settings
-                      type: 'danger',
-                      delay: 5000,
-                      timer: 3000,
-                      z_index: 9999,
-                      showProgressbar: false,
-                      placement: {
-                        from: "bottom",
-                        align: "right"
-                      },
-                      animate: {
-                        enter: 'animated bounceInUp',
-                        exit: 'animated bounceOutDown'
-                      },
-                    });
-
-
-
-
-                  }
-                  },
-                  failure: function(errMsg) {
-                    alert(errMsg.Msg);
-                  }
-                });
-           
-
-
-});
+    });
 
 </script>
+@endif
 
 @stop('scripts')

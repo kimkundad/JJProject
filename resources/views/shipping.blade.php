@@ -499,19 +499,17 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                         <input type="hidden" class="form-control"  name="total" value="{{$total_price}}" required>
                         <input type="hidden" class="form-control"  name="shipping_price" value="{{$shipping_price}}" required>
                         <input type="hidden" class="form-control"  name="policy_terms" value="1" required>
+
+						@if(Session::get('vouchers_id') != null)
+						<input type="hidden" class="form-control"  name="gift_id" value="{{Session::get('vouchers_id')}}" required>
+						<input type="hidden" class="form-control"  name="u_gift_id" value="{{Session::get('vouchers_id_sub')}}" required>
+						@endif
+
 						<a href="javascript:{}" onclick="document.getElementById('contactform').submit();" id="submit-contact" class="btn_1 green medium">ไปยังขั้นตอนต่อไป</a>
 					</div>
 
 
           </form>
-
-
-
-
-
-
-
-
 
         </div>
         <br><br>
@@ -522,10 +520,48 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 						<table class="table table_summary">
 							<tbody>
 
+							<tr>
+                <td colspan="2">
+                  @if(count($objs)> 0)
+                <div class="form-group" >
+									<select class="form-control" id="my_code" name="country_order" id="country" >
+										<option value="" selected="">--เลือกโค้ดส่วนลด--</option>
+                    @if(isset($objs))
+                      @foreach($objs as $u)
+                      <option value="{{ $u->idp }}" >{{ $u->name }} ลด {{ $u->detail }}%</option>
+                      @endforeach
+                    @endif
+									</select>
+                                    
+								</div>
+                @else
+                <div class="form-group" >
+									<select class="form-control" name="country_order" id="country"  disabled>
+										<option value="" selected="">--เลือกโค้ดส่วนลด--</option>
 
+									</select>
+                                    
+								</div>
+                @endif
+                </td>
+              </tr>
 
-               
-                            
+                <?php
+                  $price_s = 0;
+                ?>
+
+                @if(Session::get('vouchers_value') != null)
+                <tr>
+									<td>
+                    ใช้โค้ดส่วนลด
+									</td>
+									<td class="text-right">
+										{{ Session::get('vouchers_name') }} <br> ( ส่วนลด {{ Session::get('vouchers_value') }}% )
+									</td>
+								</tr> 
+                @endif
+
+                
 
 								<tr>
 									<td>
@@ -537,21 +573,51 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 								</tr>
 								<tr>
 									<td>
-                                    ค่าจัดส่ง
+										ค่าจัดส่ง
 									</td>
 									<td class="text-right">
 										฿{{$shipping_price}}
 									</td>
 								</tr>
 
-								<tr class="total">
+								
+                @if(Session::get('vouchers_value') != null)
+                <tr class="text-info">
 									<td>
-                                    ราคารวม
+                   ส่วนลดรวม
 									</td>
 									<td class="text-right">
-										฿{{$total_price}}
+                    
+										-{{ ceil(((($total+$shipping_price)*Session::get('vouchers_value'))/100)) }}
+
+                    <?php 
+                     $Sum = ceil(((($total+$shipping_price)*Session::get('vouchers_value'))/100));
+                    ?>
+
 									</td>
 								</tr>
+                <tr class="total">
+									<td>
+										ราคารวม
+									</td>
+									<td class="text-right">
+                    
+										฿{{$total+$shipping_price-$Sum}}
+
+									</td>
+								</tr>
+                @else
+                <tr class="total">
+									<td>
+                   ราคารวม
+									</td>
+									<td class="text-right">
+                    
+										฿{{$total+$shipping_price}}
+
+									</td>
+								</tr>
+                @endif
 							</tbody>
 						</table>
 						<a class="btn_full_outline" href="{{url('/cart')}}"><i class="icon-right"></i> กลับไปรถเข็น</a>
@@ -581,7 +647,42 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
 @section('scripts')
 
+<script type="text/javascript">
 
+$(document).ready(function(){
+
+document.getElementById('my_code').addEventListener('change', function() {
+
+console.log('You selected: ', this.value);
+
+              $.ajax({
+                  type: "POST",
+                  async: true,
+                  url: "{{url('add_vouchers_cart')}}",
+                  headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                  data: "id="+this.value,
+                  dataType: "json",
+               success: function(json){
+                 if(json.data.status == 200) {
+
+
+                  location.reload();
+                  
+
+
+                  }
+                  },
+                  failure: function(errMsg) {
+                    alert(errMsg.Msg);
+                  }
+                  
+                });
+
+
+});
+});
+
+</script>
 
 
 

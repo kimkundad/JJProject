@@ -21,6 +21,29 @@ class ProfileController extends Controller
         return view('profile.delete_account'); 
     }
 
+
+    public function user_coupon(){
+
+
+      $objs = DB::table('user_gifts')->select(
+        'user_gifts.*',
+        'user_gifts.id as idp',
+        'user_gifts.status as g_status',
+        'gifts.*'
+        )
+        ->leftjoin('gifts', 'gifts.id',  'user_gifts.gift_id')
+        ->where('user_gifts.user_id', Auth::user()->id)
+        ->get();
+
+     //   dd($objs);
+
+
+
+    $data['objs'] = $objs;
+    return view('profile.user_coupon', $data);
+
+    }
+
     public function confirm_delete_my_account($id){
 
         DB::table('users')

@@ -141,7 +141,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 								Discount
 								</td>
 								<td class="text-right">
-								฿ 0
+								฿ {{ $order->discount }}
 								</td>
 							</tr>
 								<tr>
@@ -166,7 +166,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                                     ราคารวม
 									</td>
 									<td class="text-right">
-									฿{{ number_format($order->total, 2) }}
+									฿{{ number_format(($order->total-$order->discount), 2) }}
 									</td>
 								</tr>
 							</tbody>
@@ -351,7 +351,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 								Discount
 								</td>
 								<td class="text-right">
-								฿ 0
+								฿ {{$order->discount}}
 								</td>
 							</tr>
 								<tr>
@@ -376,7 +376,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                                     ราคารวม
 									</td>
 									<td class="text-right">
-									฿{{ number_format($order->total, 2) }}
+									฿{{ number_format(($order->total-$order->discount), 2) }}
 									</td>
 								</tr>
 							</tbody>

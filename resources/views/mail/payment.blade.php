@@ -72,7 +72,12 @@ repeat-y;width:100%;display:block">
 </tr>
 <tr>
 <td style="text-align:right;font-size:12px" width="150">
-<span>ยอดที่ต้องชำระ รวม: </span>THB {{ $data_toview['data']->total }}
+<span>ส่วนลด: </span>THB{{ $data_toview['data']->discount }}
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-size:12px" width="150">
+<span>ยอดที่ต้องชำระ รวม: </span>THB {{ $data_toview['data']->total-$data_toview['data']->discount }}
 </td>
 </tr>
 </tbody>

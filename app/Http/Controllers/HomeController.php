@@ -19,7 +19,7 @@ use App\banner_img;
 use App\address;
 use App\review_product;
 use App\review_shop;
-
+use App\user_gift;
 
 
 
@@ -212,13 +212,71 @@ $data['category1'] = $cat;
 
       public function all_vouchers(){
 
-        return view('all_vouchers');
+        $objs = DB::table('gifts')->get();
+        $data['objs'] = $objs;
+        return view('all_vouchers', $data);
       }
 
 
     public function contact_us()
     {
         return view('contact_us');
+    }
+
+    public function add_vouchers(Request $request){
+
+      $gift_id = $request["id"];
+
+      if(Auth::guest()){
+
+        return response()->json([
+          'data' => [
+            'status' => 100,
+            'msg' => 'กรุณาเข้าสู่ระบบหรือทำการสมัครสมาชิกก่อน เก็บโค้ดส่วนลด'
+          ]
+        ]);
+  
+
+      }else{
+
+        $check = DB::table('user_gifts')
+          ->where('user_id', Auth::user()->id)
+          ->where('gift_id', $gift_id)
+          ->count();
+
+          if($check > 0){
+
+            return response()->json([
+              'data' => [
+                'status' => 100,
+                'msg' => 'คุณมีโค้ดส่วนลดนี้อยุ่แล้วในระบบ'
+              ]
+            ]);
+
+          }else{
+
+
+            $package = new user_gift();
+            $package->user_id = Auth::user()->id;
+            $package->gift_id = $gift_id;
+            $package->save();
+
+            return response()->json([
+              'data' => [
+                'status' => 200,
+                'msg' => 'ท่านสามารถใช้ โค้ดส่วนลดนี้ร่วมกับรายการสินค้าได้ '
+              ]
+            ]);
+
+          }
+
+        
+  
+
+      }
+
+      
+
     }
 
 
@@ -1360,8 +1418,96 @@ $data['category1'] = $cat;
 
     public function cart(){
 
-      return view('cart');
+      if(Auth::guest()){
+
+        $objs = DB::table('user_gifts')->select(
+          'user_gifts.*',
+          'user_gifts.id as idp',
+          'user_gifts.status as g_status',
+          'gifts.*',
+          'gifts.id as idg',
+          )
+          ->leftjoin('gifts', 'gifts.id',  'user_gifts.gift_id')
+          ->where('user_gifts.user_id', 0)
+          ->get();
+
+      }else{
+
+        $objs = DB::table('user_gifts')->select(
+          'user_gifts.*',
+          'user_gifts.id as idp',
+          'user_gifts.status as g_status',
+          'gifts.*',
+          'gifts.id as idg',
+          )
+          ->leftjoin('gifts', 'gifts.id',  'user_gifts.gift_id')
+          ->where('user_gifts.user_id', Auth::user()->id)
+          ->where('user_gifts.status',0)
+          ->get();
+
+      }
+
+      
+
+     //   dd($objs);
+
+
+
+    $data['objs'] = $objs;
+
+      return view('cart', $data);
  
+    }
+
+
+    public function add_vouchers_cart(Request $request){
+
+      $id = $request['id'];
+
+      $check = DB::table('user_gifts')
+          ->where('user_id', Auth::user()->id)
+          ->where('id', $id)
+          ->count();
+
+      if($check > 0){
+
+        $obj = DB::table('user_gifts')
+          ->where('user_id', Auth::user()->id)
+          ->where('id', $id)
+          ->first();
+
+        $objs = DB::table('gifts')
+          ->where('id', $obj->gift_id)
+          ->first();
+
+      Session::put('vouchers_id', $objs->id);
+      Session::put('vouchers_id_sub', $id);
+      Session::put('vouchers_value', $objs->detail);
+      Session::put('vouchers_name', $objs->name);
+
+      return response()->json([
+        'data' => [
+          'status' => 200,
+          'msg' => 'ท่านสามารถใช้ โค้ดส่วนลดนี้ร่วมกับรายการสินค้าได้ '
+        ]
+      ]);
+
+      }else{
+
+        return response()->json([
+          'data' => [
+            'status' => 100,
+            'msg' => 'ท่านสามารถใช้ โค้ดส่วนลดนี้ร่วมกับรายการสินค้าได้ '
+          ]
+        ]);
+
+      }
+
+
+      
+
+
+
     }
 
 
@@ -1401,6 +1547,48 @@ $data['category1'] = $cat;
 
       $provinces = DB::table('provinces')->get();
       $data['provinces'] = $provinces;
+
+
+
+      if(Auth::guest()){
+
+        $objs = DB::table('user_gifts')->select(
+          'user_gifts.*',
+          'user_gifts.id as idp',
+          'user_gifts.status as g_status',
+          'gifts.*',
+          'gifts.id as idg',
+          )
+          ->leftjoin('gifts', 'gifts.id',  'user_gifts.gift_id')
+          ->where('user_gifts.user_id', 0)
+          ->get();
+
+      }else{
+
+        $objs = DB::table('user_gifts')->select(
+          'user_gifts.*',
+          'user_gifts.id as idp',
+          'user_gifts.status as g_status',
+          'gifts.*',
+          'gifts.id as idg',
+          )
+          ->leftjoin('gifts', 'gifts.id',  'user_gifts.gift_id')
+          ->where('user_gifts.user_id', Auth::user()->id)
+          ->where('user_gifts.status',0)
+          ->get();
+
+      }
+
+      
+
+     //   dd($objs);
+
+
+
+    $data['objs'] = $objs;
+
+
+
       return view('shipping', $data);
  
     }
@@ -1608,6 +1796,31 @@ public function add_my_address(Request $request){
 
           $randomSixDigitInt = 'ORDER'.(\random_int(1000000, 9999999));
 
+          if(isset($request['gift_id'])){
+
+            $gift = DB::table('gifts')
+            ->where('id', $request['gift_id'])
+            ->first();
+
+            $discount = ceil(((($request['total'])*$gift->detail)/100));
+
+            $u_gift_id = $request['u_gift_id'];
+            $gift_id = $request['gift_id'];
+
+            $gif = user_gift::find($u_gift_id);
+            $gif->status = 1;
+            $gif->save();
+
+          
+          }else{
+
+            $discount = 0;
+            $u_gift_id = 0;
+            $gift_id = 0;
+            
+          }
+          
+
           $package = new order();
           $package->user_id = Auth::user()->id;
           $package->name_order = $request['name_order'];
@@ -1619,9 +1832,41 @@ public function add_my_address(Request $request){
           $package->street_order = $request['street_order'];
           $package->total = $request['total'];
           $package->shipping_price = $request['shipping_price'];
+          $package->gift_id = $gift_id;
+          $package->u_gift_id = $u_gift_id;
+          $package->discount = $discount;
           $package->save();
  
           $the_id = $package->id;
+
+          $my_total = $package->total-$discount;
+
+
+          $message = "มียอดสั่งซื้อสินค้าโดย ".$request['name_order'].", ข้อมูลผู้ติดต่อ : ".$request['telephone_order'].", ".$request['email']." หมายเลขสั่งซื้อ : ".$randomSixDigitInt." ยอดสั่งซื้อ : ".$my_total;
+          $lineapi = env('line_token');
+          
+
+          $mms =  trim($message);
+          $chOne = curl_init();
+          curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
+          curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
+          curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
+          curl_setopt($chOne, CURLOPT_POST, 1);
+          curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=$mms");
+          curl_setopt($chOne, CURLOPT_FOLLOWLOCATION, 1);
+          $headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer '.$lineapi.'',);
+          curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
+          curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
+          $result = curl_exec($chOne);
+          if(curl_error($chOne)){
+          echo 'error:' . curl_error($chOne);
+          }else{
+          $result_ = json_decode($result, true);
+      //    echo "status : ".$result_['status'];
+      //    echo "message : ". $result_['message'];
+          }
+          curl_close($chOne);
+
  
           $cart = Session::get('cart');
  
@@ -1655,7 +1900,7 @@ public function add_my_address(Request $request){
  
                      //   dd($order_detail);
  
-          $data['bank'] = $bank;
+         $data['bank'] = $bank;
          $data['order'] = $order;
          $data['order_detai1'] = $order_detail;
  
@@ -1673,6 +1918,11 @@ public function add_my_address(Request $request){
  
          unset($cart);
          session()->forget('cart');
+
+         session()->forget('vouchers_id');
+         session()->forget('vouchers_id_sub');
+         session()->forget('vouchers_value');
+         session()->forget('vouchers_name');
 
   return redirect(url('payment/'.$randomSixDigitInt))->with('aadd_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
 

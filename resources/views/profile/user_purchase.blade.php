@@ -107,7 +107,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 								<div class="col-lg-2 col-md-3">
 									<ul class="info_booking">
 										<li><strong style="font-size: 14px;">ยอดชำระ</strong><br>
-                                        <span class="text-danger" style="font-size: 16px;">{{number_format($u->total+$u->shipping_price, 2)}}</span>
+                                        <span class="text-danger" style="font-size: 16px;">{{number_format($u->total-$u->discount, 2)}}</span>
                                         <strong style="font-size: 14px;">บาท</strong>
                                     </li>
 										
@@ -118,7 +118,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                                         <a href="{{url('payment_notify_item2/'.$u->id)}}" class="btn_2">ดูรายละเอียด</a>
                                         @if($u->order_status == 0)
                                         
-                                        <a href="{{url('confirm_payment?id='.$u->id)}}" style="margin-top:10px" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block">แจ้งชำระเงิน</a>
+                                        <a href="{{url('confirm_payment?id='.$u->lastname_order)}}" style="margin-top:10px" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block">แจ้งชำระเงิน</a>
                                         @endif
 									</div>
 								</div>
@@ -157,7 +157,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 								<div class="col-lg-2 col-md-3">
 									<ul class="info_booking">
 										<li><strong style="font-size: 14px;">ยอดชำระ</strong><br>
-                                        <span class="text-danger" style="font-size: 16px;">{{number_format($u->total+$u->shipping_price, 2)}}</span>
+                                        <span class="text-danger" style="font-size: 16px;">{{number_format($u->total-$u->discount, 2)}}</span>
                                         <strong style="font-size: 14px;">บาท</strong>
                                     </li>
 										
@@ -168,7 +168,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                                         <a href="{{url('payment_notify_item2/'.$u->id)}}" class="btn_2">ดูรายละเอียด</a>
                                         @if($u->order_status == 0)
                                         
-                                        <a href="{{url('confirm_payment?id='.$u->id)}}" style="margin-top:10px" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block">แจ้งชำระเงิน</a>
+                                        <a href="{{url('confirm_payment?id='.$u->lastname_order)}}" style="margin-top:10px" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block">แจ้งชำระเงิน</a>
                                         @endif
 									</div>
 								</div>
@@ -207,7 +207,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 								<div class="col-lg-2 col-md-3">
 									<ul class="info_booking">
 										<li><strong style="font-size: 14px;">ยอดชำระ</strong><br>
-                                        <span class="text-danger" style="font-size: 16px;">{{number_format($u->total+$u->shipping_price, 2)}}</span>
+                                        <span class="text-danger" style="font-size: 16px;">{{number_format($u->total-$u->discount, 2)}}</span>
                                         <strong style="font-size: 14px;">บาท</strong>
                                     </li>
 										
@@ -218,7 +218,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                                         <a href="{{url('payment_notify_item2/'.$u->id)}}" class="btn_2">ดูรายละเอียด</a>
                                         @if($u->order_status == 0)
                                         
-                                        <a href="{{url('confirm_payment?id='.$u->id)}}" style="margin-top:10px" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block">แจ้งชำระเงิน</a>
+                                        <a href="{{url('confirm_payment?id='.$u->lastname_order)}}" style="margin-top:10px" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block">แจ้งชำระเงิน</a>
                                         @endif
 									</div>
 								</div>

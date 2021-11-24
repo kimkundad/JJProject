@@ -88,6 +88,7 @@ class SocialAuthController extends Controller
             ]);
         } else {
 
+
             if($providerUser->getEmail() != null){
             // create a new user
             $user = User::create([
@@ -104,9 +105,11 @@ class SocialAuthController extends Controller
 
         }else{
 
+            $ran_email = (\random_int(1000, 9999)).'email.com';
+
             $user = User::create([
                 'name' => $providerUser->getName(),
-                'email' => 'no_email',
+                'email' => $ran_email,
                 'avatar' => $providerUser->getAvatar(),
                 'provider' => $driver,
                 'provider_id' => $providerUser->getId(),

@@ -105,7 +105,7 @@ class SocialAuthController extends Controller
 
         }else{
 
-            $ran_email = (\random_int(1000, 9999)).'email.com';
+            $ran_email = (\random_int(1000, 9999)).'@email.com';
 
             $user = User::create([
                 'name' => $providerUser->getName(),

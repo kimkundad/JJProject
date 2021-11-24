@@ -341,10 +341,7 @@ $data['category1'] = $cat;
               'msg' => 'This user is verified by recaptcha.'
             ]
           ]);
-
             }
-
-
     }
 
 
@@ -1272,6 +1269,20 @@ $data['category1'] = $cat;
 
   }
 
+  public function success_payment_auto($id){
+
+    $order_data = DB::table('orders')
+            ->where('id', $id)
+            ->first();
+
+            $data['objs'] = $order_data;
+
+    return view('success_payment_auto', $data);
+
+  }
+
+  
+
   public function product($id){
 
      //dd(Session::get('cart'));
@@ -1925,6 +1936,196 @@ public function add_my_address(Request $request){
          session()->forget('vouchers_name');
 
   return redirect(url('payment/'.$randomSixDigitInt))->with('aadd_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
+
+}
+
+
+
+public function result_payment(Request $request){
+
+ // dd($request->all());
+
+  $response = file_get_contents('php://input');
+echo "Response:<br/><textarea style='width:100%;height:80px'>".$response."</textarea>";
+
+//each response params:
+$version = $_REQUEST["version"];
+$request_timestamp = $_REQUEST["request_timestamp"];
+
+
+$merchant_id = $_REQUEST["merchant_id"];
+$currency = $_REQUEST["currency"];
+$order_id = $_REQUEST["order_id"];
+$amount = $_REQUEST["amount"];
+$invoice_no = $_REQUEST["invoice_no"];
+$transaction_ref = $_REQUEST["transaction_ref"];
+$approval_code = $_REQUEST["approval_code"];
+$eci = $_REQUEST["eci"];
+$transaction_datetime = $_REQUEST["transaction_datetime"];
+$payment_channel = $_REQUEST["payment_channel"];
+$payment_status = $_REQUEST["payment_status"];
+$channel_response_code = $_REQUEST["channel_response_code"];
+$channel_response_desc = $_REQUEST["channel_response_desc"];
+$masked_pan = $_REQUEST["masked_pan"];
+$stored_card_unique_id = $_REQUEST["stored_card_unique_id"];
+$backend_invoice = $_REQUEST["backend_invoice"];
+$paid_channel = $_REQUEST["paid_channel"];
+$recurring_unique_id = $_REQUEST["recurring_unique_id"];
+$paid_agent = $_REQUEST["paid_agent"];
+$payment_scheme = $_REQUEST["payment_scheme"];
+$user_defined_1 = $_REQUEST["user_defined_1"];
+$user_defined_2 = $_REQUEST["user_defined_2"];
+$user_defined_3 = $_REQUEST["user_defined_3"];
+$user_defined_4 = $_REQUEST["user_defined_4"];
+$user_defined_5 = $_REQUEST["user_defined_5"];
+$browser_info = $_REQUEST["browser_info"];
+$ippPeriod = $_REQUEST["ippPeriod"];
+$ippInterestType = $_REQUEST["ippInterestType"];
+$ippInterestRate = $_REQUEST["ippInterestRate"];
+$ippMerchantAbsorbRate = $_REQUEST["ippMerchantAbsorbRate"];
+$payment_scheme = $_REQUEST["payment_scheme"];
+$process_by = $_REQUEST["process_by"];
+$sub_merchant_list = $_REQUEST["sub_merchant_list"];
+  $hash_value = $_REQUEST["hash_value"];
+/*	echo "version: ".$version."<br/>";
+
+  echo "request_timestamp: ".$request_timestamp."<br/>";
+  echo "merchant_id: ".$merchant_id."<br/>";
+  echo "currency: ".$currency."<br/>";
+  echo "order_id: ".$order_id."<br/>";
+  echo "amount: ".$amount."<br/>";
+  echo "invoice_no: ".$invoice_no."<br/>";
+  echo "transaction_ref: ".$transaction_ref."<br/>";
+  echo "approval_code: ".$approval_code."<br/>";
+  echo "eci: ".$eci."<br/>";
+  echo "transaction_datetime: ".$transaction_datetime."<br/>";
+  echo "payment_channel: ".$payment_channel."<br/>";
+  echo "payment_status: ".$payment_status."<br/>";
+  echo "channel_response_code: ".$channel_response_code."<br/>";
+  echo "channel_response_desc: ".$channel_response_desc."<br/>";
+  echo "masked_pan: ".$masked_pan."<br/>";
+  echo "stored_card_unique_id: ".$stored_card_unique_id."<br/>";
+  echo "backend_invoice: ".$backend_invoice."<br/>";
+  echo "paid_channel: ".$paid_channel."<br/>";
+  echo "recurring_unique_id: ".$recurring_unique_id."<br/>";
+echo "sub_merchant_list: " .$sub_merchant_list."<br/>";
+  echo "payment_scheme: ".$payment_scheme."<br/>";
+  echo "user_defined_1: ".$user_defined_1."<br/>";
+  echo "user_defined_2: ".$user_defined_2."<br/>";
+  echo "user_defined_3: ".$user_defined_3."<br/>";
+  echo "user_defined_4: ".$user_defined_4."<br/>";
+  echo "user_defined_5: ".$user_defined_5."<br/>";
+  echo "browser_info: ".$browser_info."<br/>";
+  echo "ippPeriod: " .$ippPeriod."<br/>";
+echo "ippInterestType: " .$ippInterestType."<br/>";
+echo "ippInterestRate: " .$ippInterestRate."<br/>";
+echo "ippMerchantAbsorbRate: " .$ippMerchantAbsorbRate."<br/>";
+echo "payment_scheme: " .$payment_scheme."<br/>";
+echo "process_by: " .$process_by."<br/>";
+echo "sub_merchant_list: " .$sub_merchant_list."<br/>";
+  echo "hash_value: ".$hash_value."<br/>"; */
+
+//check response hash value (for security, hash value validation is Mandatory)
+
+$checkHashStr = $version . $request_timestamp . $merchant_id . $order_id .
+$invoice_no . $currency . $amount . $transaction_ref . $approval_code .
+$eci . $transaction_datetime . $payment_channel . $payment_status .
+$channel_response_code . $channel_response_desc . $masked_pan .
+$stored_card_unique_id . $backend_invoice . $paid_channel . $paid_agent .
+$recurring_unique_id . $user_defined_1 . $user_defined_2 . $user_defined_3 .
+$user_defined_4 . $user_defined_5 . $browser_info . $ippPeriod .
+$ippInterestType . $ippInterestRate . $ippMerchantAbsorbRate . $payment_scheme .
+$process_by . $sub_merchant_list;
+
+$SECRETKEY = env('secret_key');
+  $checkHash = hash_hmac('sha256',$checkHashStr, $SECRETKEY,false);
+
+  $a = $order_id;
+  $count_a = strlen($a);
+  for($i=1;$i<=$count_a;$i++)
+  {
+      //echo $a[$i];
+      if($a[$i] != '0'){
+        break;
+      }
+  }
+
+
+  $b = $amount;
+  $count_b = strlen($b);
+  for($j=1;$j<=$count_b;$j++)
+  {
+      //echo $a[$i];
+      if($b[$j] != '0'){
+        break;
+      }
+  }
+
+  $new_oreder_id = substr($b, $j, 12);
+  $count_var = strlen($new_oreder_id);
+  $test_num2 = substr($new_oreder_id, -2);
+  $test_num1 = substr($new_oreder_id, 0, $count_var-2);
+  $amount2 = $test_num1.'.'.$test_num2;
+
+  $order_id = substr($a, $i, 12);
+
+  $time_tran = date_format(date_create($transaction_datetime),"d-m-Y");
+  $time2_tran = date_format(date_create($transaction_datetime),"H:i:s");
+
+  $order_data = DB::table('orders')
+            ->where('id', $order_id)
+            ->first();
+
+     $package = new pay_order();
+     $package->name_pay = $order_data->name_order;
+     $package->phone_pay = $order_data->telephone_order;
+     $package->no_pay = $order_data->lastname_order;
+     $package->money_pay = $amount2;
+     $package->bank = 0;
+     $package->day_pay = $time_tran;
+     $package->time_pay = $time2_tran;
+     $package->message_pay = 'แจ้งชำระเงิน ผ่านระบบอัตโนมัติ';
+     $package->email_pay = $order_data->email_order;
+     $package->save();
+
+     if($payment_status == '000' || $payment_status == '001'){
+      $code_status = 2;
+
+      $message = "แจ้งชำระเงินโดย ".$package->name_pay.", ข้อมูลผู้ติดต่อ : ".$package->phone_pay.", ".$package->email_pay." หมายเลขสั่งซื้อ : ".$package->no_pay." จำนวนเงิน : ".$package->money_pay;
+        $lineapi = env('line_token');
+        
+
+        $mms =  trim($message);
+        $chOne = curl_init();
+        curl_setopt($chOne, CURLOPT_URL, "https://notify-api.line.me/api/notify");
+        curl_setopt($chOne, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($chOne, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($chOne, CURLOPT_POST, 1);
+        curl_setopt($chOne, CURLOPT_POSTFIELDS, "message=$mms");
+        curl_setopt($chOne, CURLOPT_FOLLOWLOCATION, 1);
+        $headers = array('Content-type: application/x-www-form-urlencoded', 'Authorization: Bearer '.$lineapi.'',);
+        curl_setopt($chOne, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($chOne, CURLOPT_RETURNTRANSFER, 1);
+        $result = curl_exec($chOne);
+        if(curl_error($chOne)){
+        echo 'error:' . curl_error($chOne);
+        }else{
+        $result_ = json_decode($result, true);
+    //    echo "status : ".$result_['status'];
+    //    echo "message : ". $result_['message'];
+        }
+        curl_close($chOne);
+
+    }else{
+      $code_status = 1;
+    }
+
+     DB::table('orders')
+        ->where('id', $order_id)
+        ->update(['order_status' => $code_status]);
+
+     return redirect(url('success_payment_auto/'.$order_id))->with('add_success','เพิ่ม เสร็จเรียบร้อยแล้ว');
+
 
 }
 

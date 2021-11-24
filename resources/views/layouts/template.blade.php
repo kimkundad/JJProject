@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
-
+    <link rel="shortcut icon" href="{{ url('assets/img/teeneejj.png') }}" />
 
     <title> @yield('title')</title>
     <meta name="description" content="ร้านค้าและสินค้า ในตลาดนัดสวนจตุจักร รวบรวมร้านค้าที่คัดเลือดมาแล้วอย่างดี จากทั้งหมด 8,000 ร้านค้า">

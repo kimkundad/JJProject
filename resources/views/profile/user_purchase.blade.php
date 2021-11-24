@@ -75,6 +75,8 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                             </li>
                             <li class=""><a href="#section-2"><span>ที่ต้องชำระ</span></a>
                             </li>
+                            <li class=""><a href="#section-4"><span>รอการตรวจสอบ</span></a>
+                            </li>
                             <li class=""><a href="#section-3"><span>ที่ต้องได้รับ</span></a>
                             </li>
                         </ul>
@@ -98,6 +100,8 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 									<h3 class="hotel_booking">{{ $u->name_pro }}
                                         @if($u->order_status == 0)
                                         <span>สินค้ารอการชำระเงิน</span>
+                                        @elseif($u->order_status == 1)
+                                        <span>รอตรวจสอบชำระเงิน</span>
                                         @else
                                         <span>สินค้ากำลังส่งถึงคุณ</span>
                                         @endif
@@ -110,15 +114,13 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                                         <span class="text-danger" style="font-size: 16px;">{{number_format($u->total-$u->discount, 2)}}</span>
                                         <strong style="font-size: 14px;">บาท</strong>
                                     </li>
-										
 									</ul>
 								</div>
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
                                         <a href="{{url('payment_notify_item2/'.$u->id)}}" class="btn_2">ดูรายละเอียด</a>
                                         @if($u->order_status == 0)
-                                        
-                                        <a href="{{url('confirm_payment?id='.$u->lastname_order)}}" style="margin-top:10px" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block">แจ้งชำระเงิน</a>
+                                        <a href="{{url('payment/'.$u->lastname_order)}}" style="margin-top:10px" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block">ชำระเงิน</a>
                                         @endif
 									</div>
 								</div>
@@ -130,6 +132,9 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                         @endif
 
 					</section>
+
+
+                    
 
 
                     <section id="section-2" class="">
@@ -146,8 +151,10 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 								</div>
 								<div class="col-lg-6 col-md-5">
 									<h3 class="hotel_booking">{{ $u->name_pro }}
-                                        @if($u->order_status == 0)
+                                    @if($u->order_status == 0)
                                         <span>สินค้ารอการชำระเงิน</span>
+                                        @elseif($u->order_status == 1)
+                                        <span>รอตรวจสอบชำระเงิน</span>
                                         @else
                                         <span>สินค้ากำลังส่งถึงคุณ</span>
                                         @endif
@@ -182,7 +189,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 					</section>
 
 
-                    <section id="section-3" class="">
+                    <section id="section-4" class="">
 
                     @if(isset($get_order2))
                         @foreach($get_order2 as $u)
@@ -196,8 +203,10 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 								</div>
 								<div class="col-lg-6 col-md-5">
 									<h3 class="hotel_booking">{{ $u->name_pro }}
-                                        @if($u->order_status == 0)
+                                    @if($u->order_status == 0)
                                         <span>สินค้ารอการชำระเงิน</span>
+                                        @elseif($u->order_status == 1)
+                                        <span>รอตรวจสอบชำระเงิน</span>
                                         @else
                                         <span>สินค้ากำลังส่งถึงคุณ</span>
                                         @endif
@@ -215,7 +224,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 								</div>
 								<div class="col-lg-2 col-md-2">
 									<div class="booking_buttons">
-                                        <a href="{{url('payment_notify_item2/'.$u->id)}}" class="btn_2">ดูรายละเอียด</a>
+                                        <a href="{{url('payment_notify_item2/'.$u->id)}}" class="btn_2">ดูรายละเอียด </a>
                                         @if($u->order_status == 0)
                                         
                                         <a href="{{url('confirm_payment?id='.$u->lastname_order)}}" style="margin-top:10px" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block">แจ้งชำระเงิน</a>
@@ -230,6 +239,58 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
                         @endif
 
 					</section>
+
+                    <section id="section-3" class="">
+
+                        @if(isset($get_order3))
+                        @foreach($get_order3 as $u)
+						<div class="strip_booking">
+							<div class="row">
+								<div class="col-lg-2 col-md-2">
+									<div class="date">
+										<span class="month">{{date_format(date_create($u->created_at),"M")}}</span>
+										<span class="day"><strong>{{date_format(date_create($u->created_at),"d")}}</strong>{{date_format(date_create($u->created_at),"Y")}}</span>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-5">
+									<h3 class="hotel_booking">{{ $u->name_pro }}
+                                    @if($u->order_status == 0)
+                                        <span>สินค้ารอการชำระเงิน</span>
+                                        @elseif($u->order_status == 1)
+                                        <span>รอตรวจสอบชำระเงิน</span>
+                                        @else
+                                        <span>สินค้ากำลังส่งถึงคุณ</span>
+                                        @endif
+                                        
+                                    </h3>
+								</div>
+								<div class="col-lg-2 col-md-3">
+									<ul class="info_booking">
+										<li><strong style="font-size: 14px;">ยอดชำระ</strong><br>
+                                        <span class="text-danger" style="font-size: 16px;">{{number_format($u->total-$u->discount, 2)}}</span>
+                                        <strong style="font-size: 14px;">บาท</strong>
+                                    </li>
+									</ul>
+								</div>
+								<div class="col-lg-2 col-md-2">
+									<div class="booking_buttons">
+                                        <a href="{{url('payment_notify_item2/'.$u->id)}}" class="btn_2">ดูรายละเอียด</a>
+                                        @if($u->order_status == 0)
+                                        <a href="{{url('payment/'.$u->lastname_order)}}" style="margin-top:10px" class="mb-1 mt-1 mr-1 btn btn-xs btn-warning btn-block">ชำระเงิน</a>
+                                        @endif
+									</div>
+								</div>
+							</div>
+							<!-- End row -->
+						</div>
+						<!-- End strip booking -->
+                        @endforeach
+                        @endif
+
+					</section>
+
+
+                    
 
 
 

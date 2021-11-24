@@ -186,6 +186,7 @@ if(name == '' || msg == '' || email == '' || phone == ''){
     }
 });
 
+
   $.ajax({
       url: "{{url('/api/add_contact')}}",
       headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}' },

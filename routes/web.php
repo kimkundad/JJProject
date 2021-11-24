@@ -25,6 +25,8 @@ Route::get('change/{locale}', function ($locale) {
 Route::get('oauth/{driver}', 'Auth\SocialAuthController@redirectToProvider')->name('social.oauth');
 Route::get('oauth/{driver}/callback', 'Auth\SocialAuthController@handleProviderCallback')->name('social.callback');
 
+Route::post('/api/result_payment', 'HomeController@result_payment')->name('result_payment');
+
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/', 'HomeController@index')->name('home');
@@ -52,6 +54,7 @@ Route::post('/add_wishlist', 'HomeController@add_wishlist');
 
 Route::post('/add_confirm_payment', 'HomeController@add_confirm_payment');
 Route::get('/success_payment', 'HomeController@success_payment');
+Route::get('/success_payment_auto/{id}', 'HomeController@success_payment_auto');
 Route::post('/buy_item', 'HomeController@buy_item');
 Route::get('search', 'HomeController@search');
 Route::get('/cart', 'HomeController@cart');
@@ -79,7 +82,6 @@ Route::post('add_my_address', 'HomeController@add_my_address');
 
 Route::get('wishlist', 'HomeController@wishlist');
 Route::post('del_wishlist', 'HomeController@del_wishlist');
-
 
 
 Route::get('/shipping', 'HomeController@shipping');

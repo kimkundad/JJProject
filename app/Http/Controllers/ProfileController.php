@@ -258,11 +258,51 @@ class ProfileController extends Controller
 
         }
 
+
+        $get_order3 = DB::table('orders')
+        ->where('user_id', Auth::user()->id)
+        ->where('order_status', 2)
+        ->orderBy('id', 'desc')
+        ->get();
+
+        if(count($get_order3) > 0){
+
+
+            foreach($get_order3 as $u){
+
+                $count_p = 0;
+                $name = '';
+
+                $order_de = DB::table('order_details')->select(
+                      'order_details.*',
+                      'order_details.id as id_de',
+                      'order_details.created_at as created_ats',
+                      'products.*'
+                      )
+                      ->leftjoin('products', 'products.id',  'order_details.product_id')
+                      ->where('order_details.order_id', $u->id)
+                      ->get();
+    
+    
+                      foreach($order_de as $h){
+    
+                        $name .= $h->name_pro.', ';
+                        $count_p += $h->product_total;
+    
+                        }
+              $u->count_p = $count_p;
+              $u->name_pro = $name;
+            }
+
+        }
+
+
        
         
         $data['get_order'] = $get_order;
         $data['get_order1'] = $get_order1;
         $data['get_order2'] = $get_order2;
+        $data['get_order3'] = $get_order3;
 
         return view('profile.user_purchase', $data);
     }

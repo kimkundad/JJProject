@@ -5,6 +5,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 @stop
 
 @section('stylesheet')
+
 <style>
     .main_title p {
     line-height: 24px;
@@ -19,7 +20,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 <section class="parallax-window" data-parallax="scroll" data-image-src="{{url('assets/img/home_bg_3.jpg')}}" data-natural-width="1400" data-natural-height="370">
             <div class="parallax-content-1">
               <div class="animated fadeInDown">
-                <h1>แจ้งชำระเงิน</h1>
+                <h1>การชำระเงินของท่านสำเร็จแล้ว</h1>
 
               </div>
             </div>
@@ -42,6 +43,8 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
         <br>
         <p>เราจะทำการตรวจสอบข้อมูลที่ท่านส่งมา จากนั้นจะเร่งทำการส่งสินค้าให้แก่ท่านโดยไวที่สุด ขอบคุณทุกท่านที่เข้าใช้บริการของ TeeneeJJ <br>หากเกิดความล่าช้าหรือไม่พอใจแก่ลูกค้า เราจะทำการปรับปรุงบริการของเราให้ดีขึ้น เพื่อความพึงพอใจของลูกค้าให้มากที่สุด</p>
         <br>
+        <p><b>{{ $objs->lastname_order }}</b></p>
+        <a class="btn_1 medium" href="{{ url('payment_notify_item2/'.$objs->id) }}">รายละเอียดการซื้อสินค้า</a>
         <div class="text-center">
         <img src="{{url('assets/image/payment.png')}}"  >
       </div>

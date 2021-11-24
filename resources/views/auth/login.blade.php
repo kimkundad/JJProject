@@ -128,9 +128,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 
                     <form class="form-horizontal" role="form" method="POST" action="{{url('login')}}">
                           {{ csrf_field() }}
-
                         <div class="form-group">
-
 
                             <div class="col-md-12">
                                 <input id="email" type="email" class="form-control" name="email" placeholder="Email" value="">

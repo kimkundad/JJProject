@@ -5,7 +5,12 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 @stop
 
 @section('stylesheet')
-
+<style>
+    .main_title p {
+    line-height: 24px;
+    font-size:16px;
+}
+</style>
 @stop('stylesheet')
 @section('content')
 

@@ -240,7 +240,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
           <!--End step -->
 
           	<div class="form_title">
-				<h3><strong>2</strong>ชำระผ่านบัตรเครดิต</h3>
+				<h3><strong>2</strong>ชำระผ่านบัตรเครดิต, Mobile banking</h3>
             	<p>ทุกธุรกรรมผ่านบัตรเครดิตและบัตรเดบิตได้รับการรับรองความปลอดภัย ด้วยเทคโนโลยี 2c2p Payment gateway api</p>
 			</div>
 
@@ -315,7 +315,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
           <input type="text" name="" class="form-control" value="{{number_format($order->total, 2)}}" readonly/>
           </div>
 
-          <button type="submit" class="btn btn-next" >จะเปิดให้ใช้บริการในเร็วๆนี้</button>
+          <button type="submit" class="btn btn-next" >ชำระผ่านบัตรเครดิต, Mobile banking</button>
       	</form>
 						
 						

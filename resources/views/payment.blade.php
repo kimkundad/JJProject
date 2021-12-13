@@ -250,7 +250,7 @@ TEENEEJJ - ตลาดนัดสวนจตุจักร
 						$a = number_format($a, 2, '', '');
 						printf("%012s\n", $a);
 					}
-					$money_var = $order->total;
+					$money_var = ($order->total-$order->discount)+$order->shipping_price;
 					$amount = twelvedigits($money_var);
 					$s_number = '';
 

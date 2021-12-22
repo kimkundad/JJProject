@@ -1537,7 +1537,7 @@ $data['category1'] = $cat;
 
 
 
-
+      session()->forget('vouchers_value');
       Session::put('cart', $cart);
     return redirect()->back();
 

@@ -117,7 +117,7 @@
           												</div>
 
                                   <div class="form-group">
-          													<label class="col-md-3 control-label" for="profileFirstName">น้ำหนักสินค้า / กรัม*</label>
+          													<label class="col-md-3 control-label" for="profileFirstName">ราคาจัดส่งต่อ 1 ชิ้น*</label>
           													<div class="col-md-8">
           														<input type="text" class="form-control" name="shipping_price" value="{{$objs->shipping_price}}">
           														</div>

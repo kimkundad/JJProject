@@ -2,7 +2,15 @@
 <script src="{{url('assets/js/jquery-1.11.2.min.js')}}"></script>
 <script src="{{url('assets/js/common_scripts_min.js')}}"></script>
 <script src="{{url('assets/js/functions.js')}}"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GR0DWYKKR8"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'G-GR0DWYKKR8');
+</script>
  <!-- Specific scripts -->
 <script src="{{url('assets/js/icheck.js')}}"></script>
 <script>

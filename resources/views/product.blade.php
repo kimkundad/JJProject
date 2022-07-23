@@ -774,7 +774,7 @@ span {
             <input type="hidden" name="quantity"  value="1"/>
           <a href="javascript:{}" onclick="document.getElementById('buy_item').submit();" class=" btn_1 white" style="width: 100%; text-align: center; font-size: 14px; border: 1px solid #e04f67; margin-bottom:10px;"><i class="icon-check-2" ></i> กดสั่งซื้อสินค้า</a>
 
-          <a href="https://lin.ee/FyyQM0s" target="_blank" class="btn btn-success" style="width: 100%;">
+          <a href="https://lin.ee/n70oI2B" target="_blank" class="btn btn-success" style="width: 100%;">
                                 <i class="fa fa-commenting" ></i>	สั่งซื้อผ่าน Line
                               </a>
 
